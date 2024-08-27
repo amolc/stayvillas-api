@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'knox',
+    'customers',
     'property',
 ]
 
@@ -72,6 +74,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'restserver.wsgi.application'
 
 
+
+
+AUTH_USER_MODEL = 'customers.Customers'
+
+
+SILENCED_SYSTEM_CHECKS = ["auth.E003"]
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
