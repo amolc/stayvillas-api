@@ -3,7 +3,6 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
 class CustomUserManager(BaseUserManager):
-    print("++++++++++++++")
     def create_user(self, email, password=None, **kwargs):
         user = self.model(email=email, **kwargs)
         user.set_password(password)

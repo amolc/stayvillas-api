@@ -38,12 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    "corsheaders",
     'knox',
     'customers',
     'property',
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -78,7 +80,7 @@ WSGI_APPLICATION = 'restserver.wsgi.application'
 
 AUTH_USER_MODEL = 'customers.Customers'
 
-
+CORS_ALLOW_ALL_ORIGINS = True
 SILENCED_SYSTEM_CHECKS = ["auth.E003"]
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases

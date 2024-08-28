@@ -40,8 +40,9 @@ class PropertyViews(APIView):
 
     def get(self, request, id=None, org_id=None):
         try:
-            if id:
-                item = Property.objects.get(id=id)
+            property_id = request.query_params.get('property_id')
+            if property_id:
+                item = Property.objects.get(id=property_id)
                 serializer = PropertySerializer(item)
                 return Response(
                     {"status": "success", "data": serializer.data},
@@ -64,9 +65,8 @@ class PropertyViews(APIView):
         try:
             request_data = request.data.copy()
             request_data["org_id"] = org_id
-            print(id)
-
-            item = Property.objects.get(id=id)
+            property_id = request.query_params.get('property_id')
+            item = Property.objects.get(id=property_id)
             serializer = PropertySerializer(item, data=request_data, partial=True)
             if serializer.is_valid():
                 serializer.save()
@@ -82,10 +82,9 @@ class PropertyViews(APIView):
     def delete(self, request, id=None, org_id=None):
         
         try:
-            request_data = request.data.copy()
-            request_data["org_id"] = org_id
-            Property.objects.get(id=id).delete()
-            return Response({"status": "success", "data": "Item Deleted"})
+            property_id = request.query_params.get('property_id')
+            Property.objects.get(id=property_id).delete()
+            return Response({"status": "success", "data": "Property Deleted"})
         
         except Exception as e:
             return Response(
