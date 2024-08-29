@@ -10,6 +10,7 @@ from knox.models import AuthToken
 # custom
 from .serializers import RegisterCustomerSerializer, LoginSerializer, CustomerSerializer
 from .models import Customers
+from common.utils import StayVillasResponse
 
 
 class RegisterCustomerViews(APIView):
@@ -30,10 +31,8 @@ class RegisterCustomerViews(APIView):
         
         except Exception as e:
             traceback.print_exc()  # Log the traceback for debugging
-            return Response(
-                {"status": "error", "data": str(e)},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            )   
+            return StayVillasResponse.exception_error(self.__class__.__name__, request, e)
+        
 
 class AuthenticateUser(APIView):
     
@@ -93,11 +92,7 @@ class AuthenticateUser(APIView):
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         except Exception as e:
-            print( {"status": "error", "data": str(e), 'traceback': traceback.format_exc()})
-            return Response(
-                {"status": "error", "data": str(e)},
-            status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-        )
+            return StayVillasResponse.exception_error(self.__class__.__name__, request, e)
 
 
 
@@ -119,7 +114,4 @@ class CustomerViews(APIView):
                 {"status": "success", "data": serializer.data}, status=status.HTTP_200_OK
             )
         except Exception as e:
-            return Response(
-            {"status": "error", "data": str(e)},
-                    status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                )
+            return StayVillasResponse.exception_error(self.__class__.__name__, request, e)

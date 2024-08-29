@@ -1,8 +1,4 @@
-import traceback
-
 # drf
-from django.shortcuts import render
-from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -10,6 +6,7 @@ from rest_framework import status
 # custom
 from .serializers import PropertySerializer
 from .models import Property
+from common.utils import StayVillasResponse
 
 
 class PropertyViews(APIView):
@@ -20,7 +17,6 @@ class PropertyViews(APIView):
             request_data = request.data.copy()
             request_data["org_id"] = org_id
             serializer = PropertySerializer(data=request_data)
-
             if serializer.is_valid():
                 serializer.save()
                 return Response(
@@ -28,15 +24,10 @@ class PropertyViews(APIView):
                     status=status.HTTP_200_OK,
                 )
             else:
-                return Response(
-                    {"status": "error", "data": serializer.errors},
-                    status=status.HTTP_400_BAD_REQUEST,
-                )
+                return StayVillasResponse.serializer_error(self.__class__.__name__, request, serializer)
+        
         except Exception as e:
-            return Response(
-            {"status": "error", "data": str(e), "traceback": traceback.format_exc()},
-                    status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                )
+            return StayVillasResponse.exception_error(self.__class__.__name__, request, e)
 
     def get(self, request, id=None, org_id=None):
         try:
@@ -55,10 +46,7 @@ class PropertyViews(APIView):
                 {"status": "success", "data": serializer.data}, status=status.HTTP_200_OK
             )
         except Exception as e:
-            return Response(
-            {"status": "error", "data": str(e)},
-                    status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                )
+            return StayVillasResponse.exception_error(self.__class__.__name__, request, e)
 
     def put(self, request, id=None, org_id=None):
 
@@ -72,13 +60,11 @@ class PropertyViews(APIView):
                 serializer.save()
                 return Response({"status": "success", "data": serializer.data})
             else:
-                return Response({"status": "error", "data": serializer.errors})
+                return StayVillasResponse.serializer_error(self.__class__.__name__, request, serializer)
         
         except Exception as e:
-            return Response(
-            {"status": "error", "data": str(e)},
-                    status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                )
+            return StayVillasResponse.exception_error(self.__class__.__name__, request, e)
+        
     def delete(self, request, id=None, org_id=None):
         
         try:
@@ -87,8 +73,5 @@ class PropertyViews(APIView):
             return Response({"status": "success", "data": "Property Deleted"})
         
         except Exception as e:
-            return Response(
-            {"status": "error", "data": str(e)},
-                    status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                )
+            return StayVillasResponse.exception_error(self.__class__.__name__, request, e)
 
