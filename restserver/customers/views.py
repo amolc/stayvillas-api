@@ -86,7 +86,7 @@ class AuthenticateUser(APIView):
                     "Token": token
                 }
 
-                return Response(data)
+                return Response({'status': "success", 'data': data})
 
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
