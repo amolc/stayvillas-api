@@ -19,5 +19,11 @@ class Property(models.Model):
     class Meta:
         db_table = "Property"
 
-        def __str__(self):
-            return self.property_name
+    def __str__(self):
+        return self.property_name
+        
+
+
+class PropertyImages(models.Model):
+    property_id = models.ForeignKey('Property', on_delete=models.RESTRICT, related_name='propertyImage',)
+    image = models.ImageField(upload_to='property/image')
