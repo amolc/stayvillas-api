@@ -14,9 +14,9 @@ export REDIS_PORT="6379"
 # config for api server
 REPO_DIR="/home/ubuntu/repos/stayvillas-api"
 REPO_BRANCH="main"
-PROJECT_DEST="/var/www/stayvillas-api"
+PROJECT_DEST="/home/ubuntu/stayvillas-api"
 APISERVER="restserver"
-STATIC_DIR="/var/www/static"
+STATIC_DIR="/home/ubuntu/stayvillas-api/static"
 EXCLUDE_DIRS="logs/ /.git/ /datafeed/csv/ venv/"
 
 # supervisor names
