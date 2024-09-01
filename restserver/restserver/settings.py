@@ -25,7 +25,15 @@ SECRET_KEY = 'django-insecure-kd$!n!^n!zu-cp3c6he_9)+q!vd@z-06yb*fm9^9jvdoz80=)%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "*",
+    "localhost",
+    "api.sunandsandstays.com",
+    "127.0.0.1",
+    "*.smartportfolios.co",
+    "smartportfolios.ckq0nibpvq6u.us-west-1.rds.amazonaws.com",
+    "opulent-halibut-9r9w7qr7g5qc7v9x-30000.app.github.dev"
+]
 
 
 # Application definition
