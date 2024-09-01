@@ -49,7 +49,7 @@ done
 find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf
 rsync -a --info=NAME,PROGRESS --delete ${rsync_excluded} "$REPO_DIR/$APISERVER/" .
 
-echo "Starting quantengine following services"
+echo "Starting stayvillas following services"
 pm2 restart all
 # if [ "$APISUPERVISORNAME" != "" ]
 # then
