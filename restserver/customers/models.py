@@ -58,7 +58,7 @@ class Logs(models.Model):
     mode = models.CharField(max_length=100)
     log_message = models.TextField()
     user = models.ForeignKey(
-        "Customers",
+        "Customers", 
         on_delete=models.RESTRICT,
         null=True,
         blank=True,
