@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.db import transaction
-from knox.models import AuthToken
+from knox.models import AuthToken # type: ignore
 
 # custom
 from .serializers import RegisterCustomerSerializer, LoginSerializer, CustomerSerializer
