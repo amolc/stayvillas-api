@@ -22,4 +22,5 @@ urlpatterns = [
     path("<int:org_id>/api/customer/", include("customers.urls")),
     path("<int:org_id>/api/property/", include("property.urls")),
     path("api/destination/" , include('destination.urls'))
+    path('api/user/', include('users.urls')),
 ]
