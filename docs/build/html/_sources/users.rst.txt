@@ -1,0 +1,14 @@
+Introduction
+============
+
+The StayVillas project is designed to provide a comprehensive solution for managing vacation properties.
+
+Features
+--------
+
+- User management
+- Property listing
+- Booking system
+- Payment integration
+
+For more details, see the `Setup` section.

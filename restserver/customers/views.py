@@ -115,3 +115,36 @@ class CustomerViews(APIView):
             )
         except Exception as e:
             return StayVillasResponse.exception_error(self.__class__.__name__, request, e)
+        
+        # Update a customer
+    def put(self, request, id=None, org_id=None):
+        try:
+            if not id:
+                return Response({'status': 'error', 'message': 'ID is required for update'}, status=status.HTTP_400_BAD_REQUEST)
+
+            item = Customers.objects.get(id=id)
+            serializer = CustomerSerializer(item, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        except Customers.DoesNotExist:
+            return Response({'status': 'error', 'message': 'Customer not found'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return StayVillasResponse.exception_error(self.__class__.__name__, request, e)
+
+    # Delete a customer
+    def delete(self, request, id=None, org_id=None):
+        try:
+            if not id:
+                return Response({'status': 'error', 'message': 'ID is required for deletion'}, status=status.HTTP_400_BAD_REQUEST)
+
+            item = Customers.objects.get(id=id)
+            item.delete()
+            return Response({'status': 'success', 'message': 'Customer deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+
+        except Customers.DoesNotExist:
+            return Response({'status': 'error', 'message': 'Customer not found'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return StayVillasResponse.exception_error(self.__class__.__name__, request, e)
