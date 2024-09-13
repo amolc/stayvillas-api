@@ -9,7 +9,7 @@ from common.utils import StayVillasResponse
 
 class DestinationViews(APIView):
 
-    def get(self, request, id=None):
+    def get(self, request, id=None, org_id=None):
         try:
             if id:
                 item = Destination.objects.get(id=id)
@@ -30,7 +30,7 @@ class DestinationViews(APIView):
         except Exception as e:
             return StayVillasResponse.exception_error(self.__class__.__name__, request, e)
 
-    def post(self, request):
+    def post(self, request ,org_id=None):
         try:
             serializer = DestinationSerializer(data=request.data)
             if serializer.is_valid():
@@ -40,7 +40,7 @@ class DestinationViews(APIView):
         except Exception as e:
             return StayVillasResponse.exception_error(self.__class__.__name__, request, e)
 
-    def put(self, request, id=None):
+    def put(self, request, id=None, org_id=None):
         try:
             if not id:
                 return Response({'status': 'error', 'message': 'ID is required for update'}, status=status.HTTP_400_BAD_REQUEST)
@@ -56,7 +56,7 @@ class DestinationViews(APIView):
         except Exception as e:
             return StayVillasResponse.exception_error(self.__class__.__name__, request, e)
 
-    def delete(self, request, id=None):
+    def delete(self, request, id=None, org_id=None):
         try:
             if not id:
                 return Response({'status': 'error', 'message': 'ID is required for deletion'}, status=status.HTTP_400_BAD_REQUEST)
