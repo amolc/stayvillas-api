@@ -90,7 +90,6 @@ class LoginSerializer(serializers.Serializer):
     
 
 class CustomerSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Customers
         fields = '__all__'

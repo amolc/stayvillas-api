@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.db import transaction
-from knox.models import AuthToken
+from knox.models import AuthToken  # type: ignore 
 
 # custom
 from .serializers import RegisterCustomerSerializer, LoginSerializer, CustomerSerializer
@@ -15,23 +15,24 @@ from common.utils import StayVillasResponse
 
 class RegisterCustomerViews(APIView):
     def post(self, request, org_id=None):
-        try:
-            request_data = request.data.copy()
-            request_data["org_id"] = org_id
+        print("line 18",request.data)
 
-            serializer_class = RegisterCustomerSerializer(data=request_data)
+        request_data = request.data.copy()
+        request_data["org_id"] = org_id
 
-            if serializer_class.is_valid():
-                serializer_class.save()
-                api_response = Response(serializer_class.data, status=status.HTTP_201_CREATED)
-            else:
-                api_response = Response(serializer_class.errors, status=status.HTTP_400_BAD_REQUEST)     
+        serializer_class = RegisterCustomerSerializer(data=request_data)
 
-            return api_response
+        if serializer_class.is_valid():
+            serializer_class.save()
+            api_response = Response(serializer_class.data, status=status.HTTP_201_CREATED)
+        else:
+            api_response = Response(serializer_class.errors, status=status.HTTP_400_BAD_REQUEST)     
+
+        return api_response
         
-        except Exception as e:
-            traceback.print_exc()  # Log the traceback for debugging
-            return StayVillasResponse.exception_error(self.__class__.__name__, request, e)
+        # except Exception as e:
+        #     traceback.print_exc()  # Log the traceback for debugging
+        #     return StayVillasResponse.exception_error(self.__class__.__name__, request, e)
         
 
 class AuthenticateUser(APIView):
@@ -117,34 +118,33 @@ class CustomerViews(APIView):
             return StayVillasResponse.exception_error(self.__class__.__name__, request, e)
         
         # Update a customer
-    def put(self, request, id=None, org_id=None):
-        try:
-            if not id:
-                return Response({'status': 'error', 'message': 'ID is required for update'}, status=status.HTTP_400_BAD_REQUEST)
+    def patch(self, request, id=None, org_id=None):
+        request_data = request.data
+        request_data["org_id"] = org_id
 
-            item = Customers.objects.get(id=id)
-            serializer = CustomerSerializer(item, data=request.data, partial=True)
-            if serializer.is_valid():
-                serializer.save()
-                return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        except Customers.DoesNotExist:
-            return Response({'status': 'error', 'message': 'Customer not found'}, status=status.HTTP_404_NOT_FOUND)
-        except Exception as e:
-            return StayVillasResponse.exception_error(self.__class__.__name__, request, e)
+        print("line 123",request_data)
+        if not id:
+            return Response({'status': 'error', 'message': 'ID is required for update'}, status=status.HTTP_400_BAD_REQUEST)
+        # print("line 127",id)
+        item = Customers.objects.get(id=id)
+        print("line 129",item)
+        serializer = CustomerSerializer(item, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            # print("line 133",serializer.data)
+            return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     # Delete a customer
     def delete(self, request, id=None, org_id=None):
-        try:
-            if not id:
-                return Response({'status': 'error', 'message': 'ID is required for deletion'}, status=status.HTTP_400_BAD_REQUEST)
-
-            item = Customers.objects.get(id=id)
-            item.delete()
-            return Response({'status': 'success', 'message': 'Customer deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
-
-        except Customers.DoesNotExist:
-            return Response({'status': 'error', 'message': 'Customer not found'}, status=status.HTTP_404_NOT_FOUND)
-        except Exception as e:
-            return StayVillasResponse.exception_error(self.__class__.__name__, request, e)
+        request_data = request.data
+        request_data["org_id"] = org_id
+        if not id:
+            return Response({'status': 'error', 'message': 'ID is required for deletion'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        item = Customers.objects.get(id=id)
+        print("line 151",id)
+        print("line 151",item)
+        item.delete()
+        print("line 153",item)
+        return Response({'status': 'success', 'message': 'Customer deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
