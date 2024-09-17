@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="Pyhton" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer CRUD Operations &mdash; stayvillas 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=f2050829"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            stayvillas
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Customer CRUD Operations</a></li>
+<li><a class="reference internal" href="#customer-model">Customer Model</a><ul>
+<li><a class="reference internal" href="#api-endpoints">API Endpoints</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">stayvillas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Customer CRUD Operations</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/customer.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="customer-crud-operations">
+<h1>Customer CRUD Operations<a class="headerlink" href="#customer-crud-operations" title="Link to this heading"></a></h1>
+<p>This document describes the (Create, Read, Login) operations for the <cite>Customer</cite> model in the application.</p>
+</section>
+<section id="customer-model">
+<h1>Customer Model<a class="headerlink" href="#customer-model" title="Link to this heading"></a></h1>
+<p>The <cite>Customer</cite> model represents a user in the system and includes the following fields:</p>
+<ul class="simple">
+<li><p><cite>org_id</cite> (integer): The organization ID associated with the customer.</p></li>
+<li><p><cite>email</cite> (string): The email address of the customer.</p></li>
+<li><p><cite>password</cite> (string): The hashed password of the customer (stored securely).</p></li>
+<li><p><cite>first_name</cite> (string): The first name of the customer.</p></li>
+<li><p><cite>last_name</cite> (string): The last name of the customer.</p></li>
+<li><p><cite>city</cite> (string): The city where the customer resides.</p></li>
+<li><p><cite>mobile_number</cite> (string): The mobile phone number of the customer.</p></li>
+<li><p><cite>is_active</cite> (boolean): Indicates whether the customer is active.</p></li>
+<li><p><cite>is_super_admin</cite> (boolean): Indicates whether the customer has super admin privileges.</p></li>
+<li><p><cite>is_admin</cite> (boolean): Indicates whether the customer has admin privileges.</p></li>
+<li><p><cite>is_customer</cite> (boolean): Indicates whether the user is marked as a customer.</p></li>
+</ul>
+<section id="api-endpoints">
+<h2>API Endpoints<a class="headerlink" href="#api-endpoints" title="Link to this heading"></a></h2>
+<p>### GetAll Customer</p>
+<p><strong>Endpoint:</strong> <cite>GET baseUrl/org_id/api/customer/get-customer/</cite></p>
+<p><strong>Response Body:</strong></p>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a>json
+{</p>
+<blockquote>
+<div><p>&quot;status&quot;: &quot;success&quot;,
+&quot;data&quot;: [</p>
+<blockquote>
+<div><dl class="simple">
+<dt>{</dt><dd><p>&quot;id&quot;: 1,
+&quot;last_login&quot;: null,
+&quot;org_id&quot;: 3,
+&quot;email&quot;: &quot;<a class="reference external" href="mailto:example&#37;&#52;&#48;example&#46;com">example<span>&#64;</span>example<span>&#46;</span>com</a>&quot;,
+&quot;password&quot;: &quot;pbkdf2_sha256$870000$u6iZn1Yfho8aca2ORYPM51$9gT/uIUu74ThrP/sOh&quot;,
+&quot;first_name&quot;: &quot;John&quot;,
+&quot;last_name&quot;: &quot;Doe&quot;,
+&quot;city&quot;: &quot;New York&quot;,
+&quot;mobile_number&quot;: &quot;+1234567890&quot;,
+&quot;is_active&quot;: true,
+&quot;is_super_admin&quot;: false,
+&quot;is_admin&quot;: false,
+&quot;is_customer&quot;: true</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>}</p>
+<p>### GetById Customer</p>
+<p><strong>Endpoint:</strong> <cite>GET baseUrl/org_id/api/customer/get-customer/?id=1/</cite></p>
+<p><strong>Response Body:</strong></p>
+<p><a href="#id5"><span class="problematic" id="id6">``</span></a><a href="#id7"><span class="problematic" id="id8">`</span></a>json
+{</p>
+<blockquote>
+<div><p>&quot;status&quot;: &quot;success&quot;,
+&quot;data&quot;: [</p>
+<blockquote>
+<div><dl class="simple">
+<dt>{</dt><dd><p>&quot;id&quot;: 1,
+&quot;last_login&quot;: null,
+&quot;org_id&quot;: 3,
+&quot;email&quot;: &quot;<a class="reference external" href="mailto:example&#37;&#52;&#48;example&#46;com">example<span>&#64;</span>example<span>&#46;</span>com</a>&quot;,
+&quot;password&quot;: &quot;pbkdf2_sha256$870000$u6iZn1Yfho8aca2ORYPM51$9gT/uIUu74ThrP/sOhO=&quot;,
+&quot;first_name&quot;: &quot;John&quot;,
+&quot;last_name&quot;: &quot;Doe&quot;,
+&quot;city&quot;: &quot;New York&quot;,
+&quot;mobile_number&quot;: &quot;+1234567890&quot;,
+&quot;is_active&quot;: true,
+&quot;is_super_admin&quot;: false,
+&quot;is_admin&quot;: false,
+&quot;is_customer&quot;: true</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>}</p>
+<p>### Create a Customer</p>
+<p><strong>Endpoint:</strong> <cite>POST baseUrl/org_id/api/customer/create-customer/</cite></p>
+<p><strong>Request Body:</strong></p>
+<p><a href="#id9"><span class="problematic" id="id10">``</span></a><a href="#id11"><span class="problematic" id="id12">`</span></a>json
+{</p>
+<blockquote>
+<div><p>&quot;org_id&quot;: 1,
+&quot;email&quot;: &quot;<a class="reference external" href="mailto:example&#37;&#52;&#48;example&#46;com">example<span>&#64;</span>example<span>&#46;</span>com</a>&quot;,
+&quot;password&quot;: &quot;password&quot;,
+&quot;first_name&quot;: &quot;John&quot;,
+&quot;last_name&quot;: &quot;Doe&quot;,
+&quot;city&quot;: &quot;New York&quot;,
+&quot;mobile_number&quot;: &quot;+1234567890&quot;,
+&quot;is_active&quot;: true,
+&quot;is_super_admin&quot;: false,
+&quot;is_admin&quot;: false,
+&quot;is_customer&quot;: true</p>
+</div></blockquote>
+<p>}</p>
+<p><strong>Response Body:</strong></p>
+<p>'''json
+{</p>
+<blockquote>
+<div><p>&quot;id&quot;: 1,
+&quot;last_login&quot;: null,
+&quot;org_id&quot;: 3,
+&quot;email&quot;: &quot;<a class="reference external" href="mailto:example&#37;&#52;&#48;example&#46;com">example<span>&#64;</span>example<span>&#46;</span>com</a>&quot;,
+&quot;first_name&quot;: &quot;John&quot;,
+&quot;last_name&quot;: &quot;Doe&quot;,
+&quot;city&quot;: &quot;New York&quot;,
+&quot;mobile_number&quot;: &quot;+1234567890&quot;,
+&quot;is_active&quot;: true,
+&quot;is_super_admin&quot;: false,
+&quot;is_admin&quot;: false,
+&quot;is_customer&quot;: true</p>
+</div></blockquote>
+<p>}</p>
+<p>### Login a Customer</p>
+<p><strong>Endpoint:</strong> <cite>POST baseUrl/org_id/api/customer/login-customer/</cite></p>
+<p><strong>Request Body:</strong></p>
+<p><a href="#id13"><span class="problematic" id="id14">``</span></a><a href="#id15"><span class="problematic" id="id16">`</span></a>json
+{</p>
+<blockquote>
+<div><p>&quot;email&quot;: &quot;<a class="reference external" href="mailto:example&#37;&#52;&#48;example&#46;com">example<span>&#64;</span>example<span>&#46;</span>com</a>&quot;,
+&quot;password&quot;: &quot;password&quot;</p>
+</div></blockquote>
+<p>}</p>
+<p><strong>Response Body:</strong></p>
+<p>'''json
+{</p>
+<blockquote>
+<div><p>&quot;status&quot;: &quot;success&quot;,
+&quot;data&quot;: {</p>
+<blockquote>
+<div><p>&quot;status&quot;: 200,
+&quot;user_id&quot;: 1,
+&quot;is_super_admin&quot;: false,
+&quot;is_admin&quot;: false,
+&quot;is_customer&quot;: true,
+&quot;displayName&quot;: &quot;John&quot;,
+&quot;emailId&quot;: &quot;<a class="reference external" href="mailto:example&#37;&#52;&#48;example&#46;com">example<span>&#64;</span>example<span>&#46;</span>com</a>&quot;,
+&quot;message&quot;: &quot;Logged-in Successfully&quot;,
+&quot;Token&quot;: &quot;612e9a50ad61e6c2c6b5f9b8cbc9dd773981958c82c&quot;</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Amol c.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

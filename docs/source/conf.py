@@ -7,8 +7,8 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'stayvillas'
-copyright = '2024, Amol C'
-author = 'Amol C'
+copyright = '2024, Amol c'
+author = 'Amol c'
 release = '1.0'
 
 # -- General configuration ---------------------------------------------------
@@ -19,7 +19,7 @@ extensions = []
 templates_path = ['_templates']
 exclude_patterns = []
 
-language = 'Python'
+language = 'Pyhton'
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output

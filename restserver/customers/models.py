@@ -47,8 +47,6 @@ class Customers(AbstractBaseUser):
     class Meta:
         db_table = "Customers"
 
-    def __str__(self):
-        return self.email
         
 
 
