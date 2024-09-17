@@ -7,6 +7,3 @@ class Destination(models.Model):
 
     class Meta:
         db_table = 'Destination'
-
-    def __str__(self):
-        return f"{self.city}, {self.country}"
