@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("<int:org_id>/api/customer/", include("customers.urls")),
     path("<int:org_id>/api/property/", include("property.urls")),
-    path("<int:org_id>/api/destination/" , include('destination.urls'))
-   
+    path("<int:org_id>/api/destination/" , include('destination.urls')),
+    path("<int:org_id>/api/investor/" , include('investors.urls')),
+    path("<int:org_id>/api/agent/" , include('agent.urls'))
 ]
