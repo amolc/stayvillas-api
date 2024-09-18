@@ -7,4 +7,4 @@ cd restserver
 python manage.py migrate
 python manage.py runserver 0.0.0.0:8888
 
-# this is runserver
+
