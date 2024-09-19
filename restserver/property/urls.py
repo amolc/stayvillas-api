@@ -1,14 +1,12 @@
-# django
 from django.urls import path
-
-# custom
-from .views import PropertyViews
+from .views import PropertyViews, PropertyImageViews
 
 urlpatterns = [
+    # Property routes
+    path('properties/', PropertyViews.as_view()),  # GET all properties  or POST to create a property
+    path('properties/<int:id>/', PropertyViews.as_view()),  # GET, PATCH, DELETE a property by ID
     
-    # property
-    path("create-property/", PropertyViews.as_view()),
-    path("get-property/", PropertyViews.as_view()),
-    path("update-property/", PropertyViews.as_view()),
-    path("delete-property/", PropertyViews.as_view()),
+    # Property image routes
+    path('properties/<int:property_id>/images/', PropertyImageViews.as_view()),  # POST to upload images for a property
+    path('properties/images/<int:image_id>/', PropertyImageViews.as_view()),  # DELETE a property image by image ID
 ]

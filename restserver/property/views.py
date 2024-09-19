@@ -1,97 +1,83 @@
-# drf
-from django.db import transaction
-from django.core.files.base import ContentFile
-import base64
+from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-
-# custom
-from .serializers import PropertySerializer
 from .models import Property, PropertyImages
-from common.utils import StayVillasResponse
+from .serializers import PropertyImageSerializer, PropertySerializer
 
 
 class PropertyViews(APIView):
+    def get(self, request, id=None, org_id=None):
+        if id:
+            # Fetch a single property
+            property_item = get_object_or_404(Property, id=id)
+            serializer = PropertySerializer(property_item)
+            return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+        
+        # Fetch all properties for the organization
+        properties = Property.objects.filter(org_id=org_id)
+        serializer = PropertySerializer(properties, many=True)
+        return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
 
     def post(self, request, org_id=None):
-
-        try:
-            request_data = request.data.copy()
-            request_data["org_id"] = org_id
-            serializer = PropertySerializer(data=request_data)
-            if serializer.is_valid():
-                
-                with transaction.atomic():
-                    serializer.save()
-
-                    property_id = serializer.data.get('id')
-                    property_name = serializer.data.get('property_name')
-                    property_key_name = property_name.lower().replace(" ", "_")
-                    print(property_key_name)
-
-                    # property_images = request_data.pop('propertyImages', [])
-                    # for idx, image_data_encoded in enumerate(property_images):
-                    #     format, imgstr = image_data_encoded.split(';base64,')  
-                    #     ext = format.split('/')[-1]  
-                    #     image_file = ContentFile(base64.b64decode(imgstr), name=f'{property_key_name}_{idx}.{ext}')  
-                    #     print("-----------image_file-----------", image_file)
-                    #     PropertyImages.objects.create(property_id_id=property_id, image=image_file)
-
-
-                    return Response(
-                        {"status": "success", "data": serializer.data},
-                        status=status.HTTP_200_OK,
-                    )
-            else:
-                return StayVillasResponse.serializer_error(self.__class__.__name__, request, serializer)
+        request_data = request.data.copy()
+        request_data["org_id"] = org_id
         
-        except Exception as e:
-            return StayVillasResponse.exception_error(self.__class__.__name__, request, e)
+        serializer = PropertySerializer(data=request_data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"status": "success", "data": serializer.data}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def get(self, request, id=None, org_id=None):
-        try:
-            property_id = request.query_params.get('property_id')
-            if property_id:
-                item = Property.objects.get(id=property_id)
-                serializer = PropertySerializer(item)
-                return Response(
-                    {"status": "success", "data": serializer.data},
-                    status=status.HTTP_200_OK,
-                )
-
-            items = Property.objects.all()
-            serializer = PropertySerializer(items, many=True)
-            return Response(
-                {"status": "success", "data": serializer.data}, status=status.HTTP_200_OK
-            )
-        except Exception as e:
-            return StayVillasResponse.exception_error(self.__class__.__name__, request, e)
-
-    def put(self, request, id=None, org_id=None):
-
-        try:
-            request_data = request.data.copy()
-            request_data["org_id"] = org_id
-            property_id = request.query_params.get('property_id')
-            item = Property.objects.get(id=property_id)
-            serializer = PropertySerializer(item, data=request_data, partial=True)
-            if serializer.is_valid():
-                serializer.save()
-                return Response({"status": "success", "data": serializer.data})
-            else:
-                return StayVillasResponse.serializer_error(self.__class__.__name__, request, serializer)
+    def patch(self, request, id=None, org_id=None):
+        if not id:
+            return Response({'status': 'error', 'message': 'Property ID is required for update'}, status=status.HTTP_400_BAD_REQUEST)
         
-        except Exception as e:
-            return StayVillasResponse.exception_error(self.__class__.__name__, request, e)
+        request_data = request.data.copy()
+        request_data["org_id"] = org_id
         
+        property_item = get_object_or_404(Property, id=id)
+        serializer = PropertySerializer(property_item, data=request_data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     def delete(self, request, id=None, org_id=None):
+        if not id:
+            return Response({'status': 'error', 'message': 'Property ID is required for deletion'}, status=status.HTTP_400_BAD_REQUEST)
         
-        try:
-            property_id = request.query_params.get('property_id')
-            Property.objects.get(id=property_id).delete()
-            return Response({"status": "success", "data": "Property Deleted"})
-        
-        except Exception as e:
-            return StayVillasResponse.exception_error(self.__class__.__name__, request, e)
+        property_item = get_object_or_404(Property, id=id)
+        property_item.delete()
+        return Response({'status': 'success', 'message': 'Property deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
 
+
+class PropertyImageViews(APIView):
+    def post(self, request, org_id=None, property_id=None):
+        if not org_id:
+            return Response({'status': 'error', 'message': 'Organization ID is required'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if not property_id:
+            return Response({'status': 'error', 'message': 'Property ID is required to upload images'}, status=status.HTTP_400_BAD_REQUEST)
+         
+        property_obj = get_object_or_404(Property, id=property_id, org_id=org_id)
+
+        request_data = request.data.copy()
+        request_data["property_id"] = property_id
+        
+        serializer = PropertyImageSerializer(data=request_data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"status": "success", "data": serializer.data}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, org_id=None, image_id=None):
+        if not org_id:
+            return Response({'status': 'error', 'message': 'Organization ID is required'}, status=status.HTTP_400_BAD_REQUEST)
+         
+        if not image_id:
+            return Response({'status': 'error', 'message': 'Image ID is required for deletion'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        image_item = get_object_or_404(PropertyImages, id=image_id)
+        image_item.delete()
+        return Response({'status': 'success', 'message': 'Image deleted successfully'}, status=status.HTTP_204_NO_CONTENT)

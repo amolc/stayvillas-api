@@ -27,16 +27,21 @@ class DestinationViews(APIView):
     
     
 
-    def post(self, request ,org_id=None):
-         print("line 34",request.data)
-         request_data = request.data.copy()
-         request_data["org_id"] = org_id
-         serializer = DestinationSerializer(data=request.data)
-         print("line 35",serializer)
-         if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def post(self, request, org_id=None):
+        print("line 18",request.data)
+
+        request_data = request.data.copy()
+        request_data["org_id"] = org_id
+
+        serializer_class = DestinationSerializer(data=request_data)
+
+        if serializer_class.is_valid():
+            serializer_class.save()
+            api_response = Response(serializer_class.data, status=status.HTTP_201_CREATED)
+        else:
+            api_response = Response(serializer_class.errors, status=status.HTTP_400_BAD_REQUEST)     
+
+        return api_response
         
 
     def patch(self, request, id=None, org_id=None):
@@ -52,7 +57,7 @@ class DestinationViews(APIView):
         serializer = DestinationSerializer(item, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-        print("line 55",serializer.data)
+        print("line ",serializer.data)
         return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
 
 
