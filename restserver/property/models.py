@@ -10,6 +10,7 @@ class Property(models.Model):
     city = models.CharField(max_length=200)
     state = models.CharField(max_length=200)
     cost_per_night = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    img = models.URLField(max_length=255, null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     created_by = models.IntegerField(default=0)
     updated_date = models.DateTimeField(null=True)
@@ -27,3 +28,6 @@ class Property(models.Model):
 class PropertyImages(models.Model):
     property_id = models.ForeignKey('Property', on_delete=models.RESTRICT, related_name='propertyImage',)
     image = models.ImageField(upload_to='property/image')
+    
+    def __str__(self):
+        return f"Image for Property ID {self.property_id.id}"
