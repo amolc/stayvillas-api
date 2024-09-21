@@ -64,7 +64,9 @@ INSTALLED_APPS = [
     'agent',
     'property_listing',
     'enquiry',
-    'cancellation'
+    'cancellation',
+    'property_manager',
+    'booking'
 ]
 
 MIDDLEWARE = [

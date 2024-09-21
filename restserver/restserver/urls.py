@@ -28,5 +28,7 @@ urlpatterns = [
     path("<int:org_id>/api/agent/" , include('agent.urls')),
     path("<int:org_id>/api/property_listing/" , include('property_listing.urls')),
     path("<int:org_id>/api/enquiry/" , include('enquiry.urls')),
-    path("<int:org_id>/api/cancellation/" , include('cancellation.urls'))
+    path("<int:org_id>/api/cancellation/" , include('cancellation.urls')),
+    path("<int:org_id>/api/property_manager/" , include('property_manager.urls')),
+    path("<int:org_id>/api/booking/" , include('booking.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
