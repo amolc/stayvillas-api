@@ -62,7 +62,8 @@ INSTALLED_APPS = [
     'destination',
     'investors',
     'agent',
-    'property_listing'
+    'property_listing',
+    'enquiry'
 ]
 
 MIDDLEWARE = [
