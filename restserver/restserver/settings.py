@@ -11,6 +11,14 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
+import environ
+
+# Initialize environment variables
+env = environ.Env()
+
+# Take environment variables from .env file
+environ.Env.read_env()
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_URL = '/media/'
@@ -53,7 +61,8 @@ INSTALLED_APPS = [
     'property',
     'destination',
     'investors',
-    'agent'
+    'agent',
+    'property_listing'
 ]
 
 MIDDLEWARE = [
@@ -106,17 +115,15 @@ SILENCED_SYSTEM_CHECKS = ["auth.E003"]
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ["MYSQL_DB"],
-        'USER': os.environ["MYSQL_USER"],
-        'PASSWORD': os.environ['MYSQL_PASSWORD'],
-        'HOST': os.environ["MYSQL_HOST"], 
-       # 'HOST': os.environ["MYSQL_HOST"], # Or an IP Address that your DB is hosted on
-        'PORT': os.environ.get('MYSQL_PORT', '3306'),
-        'default-character-set':'utf8'
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',  # Using MySQL engine
+        'NAME': os.environ.get('MYSQL_DB', 'stayvillas'),
+        'USER': os.environ.get('MYSQL_USER', 'stockrobot'),
+        'PASSWORD': os.environ.get('MYSQL_PASSWORD', '10gXWOqeaf'),
+        'HOST': os.environ.get('MYSQL_HOST', 'm2.quantbots.co'),
+        'PORT': os.environ.get('MYSQL_PORT', '5432'),  # Default MySQL port
     }
-
 }
+
 
 
 # Password validation
