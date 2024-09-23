@@ -74,4 +74,4 @@ class DestinationViews(APIView):
         print("line 151",item)
         item.delete()
         print("line 153",item)
-        return Response({'status': 'success', 'message': 'Customer deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+        return Response({'status': 'success', 'message': 'Destination deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
