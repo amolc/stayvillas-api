@@ -20,15 +20,15 @@ class Booking(models.Model):
     check_in_date = models.DateField()
     check_out_date = models.DateField()
 
-    PENDING = 'Pending'
-    CONFIRMED = 'Confirmed'
-    CANCELLED = 'Cancelled'
-    BOOKING_STATUS_CHOICES = [
-        (PENDING, 'Pending'),
-        (CONFIRMED, 'Confirmed'),
-        (CANCELLED, 'Cancelled')
-    ]
-    booking_status = models.CharField(max_length=20, choices=BOOKING_STATUS_CHOICES, default=PENDING)
+    # PENDING = 'Pending'
+    # CONFIRMED = 'Confirmed'
+    # CANCELLED = 'Cancelled'
+    # BOOKING_STATUS_CHOICES = [
+    #     (PENDING, 'Pending'),
+    #     (CONFIRMED, 'Confirmed'),
+    #     (CANCELLED, 'Cancelled')
+    # ]
+    # booking_status = models.CharField(max_length=20, choices=BOOKING_STATUS_CHOICES)
 
     num_guests = models.IntegerField(default=1)
     num_rooms = models.IntegerField(default=1)  # Add number of rooms
