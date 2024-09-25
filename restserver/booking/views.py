@@ -13,7 +13,9 @@ class BookingViews(APIView):
     def post(self, request, org_id=None):
         request_data = request.data.copy()
         request_data['org_id'] = org_id
-
+        request_data['booking_status'] = 'Confirmed'
+        
+        print(request_data) 
         serializer = BookingSerializer(data=request_data)
         if serializer.is_valid():
             serializer.save()
