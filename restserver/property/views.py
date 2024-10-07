@@ -19,7 +19,7 @@ class PropertyViews(APIView):
         print(properties)
         serializer = PropertySerializer(properties, many=True)
         # print(serializer.data)
-        return Response({"status": "success", "data": "data"}, status=status.HTTP_200_OK)
+        return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
 
     def post(self, request, org_id=None):
         request_data = request.data.copy()

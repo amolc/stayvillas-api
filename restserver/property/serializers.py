@@ -8,7 +8,6 @@ from .models import Property, PropertyImages
 class PropertySerializer(serializers.ModelSerializer):
     class Meta:
         model = Property
-        # List all the fields you want to expose in the API
         fields = [
             'id', 'org_id', 'property_name', 'property_key_name', 'is_active', 'city', 
             'state', 'cost_per_night', 'title', 'property_type', 'price', 'description', 
