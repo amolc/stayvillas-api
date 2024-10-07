@@ -15,8 +15,10 @@ class PropertyViews(APIView):
             return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
         
         # Fetch all properties for the organization
-        properties = Property.objects.filter(org_id=org_id)
+        properties = Property.objects.all()
+        print(properties)
         serializer = PropertySerializer(properties, many=True)
+        # print(serializer.data)
         return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
 
     def post(self, request, org_id=None):
