@@ -49,7 +49,7 @@ class Property(models.Model):
     location_url = models.URLField(null=True, blank=True)
     great_for = models.CharField(max_length=50, choices=GREAT_FOR_CHOICES, default='all')
     other_images = models.URLField(max_length=255,null=True, blank=True)
-    img = models.ImageField(upload_to='property/image/', null=True, blank=True)
+    img = models.URLField(max_length=255,null=True, blank=True)
     address1 = models.CharField(max_length=100, default='Unknown')
     address2 = models.CharField(max_length=100, null=True, blank=True)
     pincode = models.CharField(max_length=20, default='Enter Pincode')

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="Pyhton" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRUD Operations &mdash; stayvillas 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=f2050829"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            stayvillas
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">CRUD Operations</a></li>
+<li><a class="reference internal" href="#agent-model">Agent Model</a><ul>
+<li><a class="reference internal" href="#url"><strong>URL</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#agent">Agent</a><ul>
+<li><a class="reference internal" href="#getallagent">GetAllAgent</a></li>
+<li><a class="reference internal" href="#getagentbyid">GetAgentbyId</a></li>
+<li><a class="reference internal" href="#createagent">CreateAgent</a></li>
+<li><a class="reference internal" href="#updateagent">UpdateAgent</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">stayvillas</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">CRUD Operations</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Agent.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="crud-operations">
+<h1>CRUD Operations<a class="headerlink" href="#crud-operations" title="Link to this heading"></a></h1>
+<p>This document describes the (Create, Read, Login) operations for the <cite>Agent</cite> model in the application.</p>
+</section>
+<section id="agent-model">
+<h1>Agent Model<a class="headerlink" href="#agent-model" title="Link to this heading"></a></h1>
+<p>The <cite>Agent</cite> model represents a user in the system and includes the following fields:
+- <cite>org_id</cite> (integer): The organization ID associated with the Agent.
+- <cite>email</cite> (string): The email address of the Agent.
+- <cite>last_login</cite> (string): The last login date and time of the Agent.
+- <cite>password</cite> (string): The hashed password of the Agent (stored securely).
+- <cite>first_name</cite> (string): The first name of the Agent.
+- <cite>last_name</cite> (string): The last name of the Agent.
+- <cite>city</cite> (string): The city where the Agent resides.
+- <cite>mobile_number</cite> (string): The mobile phone number of the Agent.
+- <cite>total_sales</cite> (string): The total sales closed by the Agent.
+- <cite>hire_date</cite> (date): The date the Agent was hired.
+- <cite>is_active</cite> (boolean): Indicates whether the Agent is currently active.
+- <cite>is_super_admin</cite> (boolean): Indicates whether the Agent has super admin privileges.
+- <cite>is_admin</cite> (boolean): Indicates whether the Agent has admin privileges.
+-` is_agent` (boolean): Indicates whether the user is an Agent.</p>
+<section id="url">
+<h2><strong>URL</strong><a class="headerlink" href="#url" title="Link to this heading"></a></h2>
+<p><strong>Local Development URL:</strong></p>
+<ul class="simple">
+<li><p><cite>baseurl`</cite> = &quot;<a class="reference external" href="http://localhost:7777/1/api/">http://localhost:7777/1/api/</a>&quot;</p></li>
+</ul>
+<p><strong>Production URL:</strong></p>
+<ul class="simple">
+<li><p><cite>baseurl`</cite> = &quot;<a class="reference external" href="https://api.sunandsandapi.com/1/api/">https://api.sunandsandapi.com/1/api/</a>&quot;</p></li>
+</ul>
+</section>
+</section>
+<section id="agent">
+<h1>Agent<a class="headerlink" href="#agent" title="Link to this heading"></a></h1>
+<section id="getallagent">
+<h2>GetAllAgent<a class="headerlink" href="#getallagent" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Endpoint:</strong> <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">baseUrl/org_id/api/agent/get-agent/</span></code></p></li>
+<li><p><strong>Response Body:</strong></p></li>
+</ul>
+<p>}</p>
+</section>
+<section id="getagentbyid">
+<h2>GetAgentbyId<a class="headerlink" href="#getagentbyid" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Endpoint:</strong> <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">baseUrl/org_id/api/customer/get-customer/?id=2/</span></code></p></li>
+<li><p><strong>Response Body:</strong></p></li>
+</ul>
+<p>}</p>
+</section>
+<section id="createagent">
+<h2>CreateAgent<a class="headerlink" href="#createagent" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Endpoint:</strong> <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">baseUrl/org_id/api/agent/create-agent/</span></code></p></li>
+<li><p><strong>Request Body:</strong></p></li>
+</ul>
+<ul class="simple">
+<li><p><strong>Response Body:</strong></p></li>
+</ul>
+</section>
+<section id="updateagent">
+<h2>UpdateAgent<a class="headerlink" href="#updateagent" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Endpoint:</strong> <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">baseUrl/org_id/api/agent/update-agent/{Id}/</span></code></p></li>
+<li><p><strong>Request Body:</strong></p></li>
+</ul>
+<ul class="simple">
+<li><p><strong>Response Body</strong></p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;last_login&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;org_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;admin@gmail.com&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pbkdf2_sha256$870000$nPNvntukcyTDuJPrqSYWoX$GwIpAXYIvJ8zF/2wUhdP0sYC8Sm2vCGDQWucSD0NJvQ=&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;D&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;mobile_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7719912929&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Mumbai&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;total_sales&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10000.00&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;hire_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;is_active&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;is_super_admin&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;is_admin&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;is_agent&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Amol c.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
