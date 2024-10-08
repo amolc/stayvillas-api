@@ -1,10 +1,10 @@
-Customer CRUD Operations
-========================
+CRUD Operations
+===============
 
 This document describes the (Create, Read, Login) operations for the `Customer` model in the application.
 
 Customer Model
-==============
+--------------
 
 The `Customer` model represents a user in the system and includes the following fields:
 
@@ -19,18 +19,34 @@ The `Customer` model represents a user in the system and includes the following 
 - `is_super_admin` (boolean): Indicates whether the customer has super admin privileges.
 - `is_admin` (boolean): Indicates whether the customer has admin privileges.
 - `is_customer` (boolean): Indicates whether the user is marked as a customer.
+- `Token`(string):The authentication token used to validate the customer's session.
+- `Status`(string):The current status of the customer.
+- `displayName`(string): The display name of the customer, typically used for showing in user interfaces.
+        
+URL
+---
 
-API Endpoints
--------------
+**Local Development URL:**
 
-### GetAll Customer
+- `baseurl`` = "http://localhost:7777/1/api/"
 
-**Endpoint:** `GET baseUrl/org_id/api/customer/get-customer/`
+**Production URL:**
 
-**Response Body:**
+- `baseurl`` = "https://api.sunandsandapi.com/1/api/"
 
-```json
-{
+Customer
+========
+
+GetAllCustomer
+---------------
+
+- **Endpoint:** ``GET baseUrl/org_id/api/customer/get-customer/``
+
+- **Response Body:**
+
+.. code-block:: json
+    
+    {
     "status": "success",
     "data": [
         {
@@ -48,17 +64,19 @@ API Endpoints
             "is_admin": false,
             "is_customer": true
         }
-    ]
-}
+            ]
+    }
 
-### GetById Customer
+GetCustomerById
+----------------
 
-**Endpoint:** `GET baseUrl/org_id/api/customer/get-customer/?id=1/`
+- **Endpoint:** ``GET baseUrl/org_id/api/customer/get-customer/{Id}/``
 
-**Response Body:**
+- **Response Body:**
 
-```json
-{
+.. code-block:: json
+    
+    {
     "status": "success",
     "data": [
         {
@@ -76,17 +94,19 @@ API Endpoints
             "is_admin": false,
             "is_customer": true
         }
-    ]
-}
+            ]
+    }
 
-### Create a Customer
+CreateCustomer
+-----------------
 
-**Endpoint:** `POST baseUrl/org_id/api/customer/create-customer/`
+- **Endpoint:** ``POST baseUrl/org_id/api/customer/create-customer/``
 
-**Request Body:**
+- **Request Body:**
 
-```json
-{
+.. code-block:: json
+    
+    {
   "org_id": 1,
   "email": "example@example.com",
   "password": "password",
@@ -98,12 +118,13 @@ API Endpoints
   "is_super_admin": false,
   "is_admin": false,
   "is_customer": true
-}
+    }
 
-**Response Body:**
+- **Response Body:**
 
-'''json
-{
+.. code-block:: json
+    
+    {
     "id": 1,
     "last_login": null,
     "org_id": 3,
@@ -116,24 +137,27 @@ API Endpoints
     "is_super_admin": false,
     "is_admin": false,
     "is_customer": true
-}
+    }
 
-### Login a Customer
+LoginCustomer
+-------------
 
-**Endpoint:** `POST baseUrl/org_id/api/customer/login-customer/`
+- **Endpoint:** ``POST baseUrl/org_id/api/customer/login-customer/``
 
-**Request Body:**
+- **Request Body:**
 
-```json
-{
+.. code-block:: json
+    
+    {
     "email": "example@example.com",
     "password": "password"
-}
+    }
 
-**Response Body:**
+- **Response Body:**
 
-'''json
-{
+.. code-block:: json
+    
+    {
     "status": "success",
     "data": {
         "status": 200,
@@ -145,5 +169,5 @@ API Endpoints
         "emailId": "example@example.com",
         "message": "Logged-in Successfully",
         "Token": "612e9a50ad61e6c2c6b5f9b8cbc9dd773981958c82cf276156904920c79d2664"
+            }
     }
-}
