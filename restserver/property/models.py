@@ -27,7 +27,9 @@ class Property(models.Model):
     # New fields
     title = models.CharField(max_length=255, default='Add Title')
     property_type = models.CharField(max_length=50, choices=PROPERTY_TYPE_CHOICES, default='Select Property Type')
-    price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    price_villa = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    price_room = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    num_rooms = models.PositiveIntegerField(default=0)
     description = models.TextField(default='No description available')
     floors = models.PositiveIntegerField(default=0)
     num_bedrooms = models.PositiveIntegerField(default=0)
