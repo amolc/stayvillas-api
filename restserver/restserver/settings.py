@@ -11,13 +11,13 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
-import environ
+# import environ
 
 # Initialize environment variables
-env = environ.Env()
+# env = environ.Env()
 
 # Take environment variables from .env file
-environ.Env.read_env()
+# environ.Env.read_env()
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -66,7 +66,9 @@ INSTALLED_APPS = [
     'enquiry',
     'cancellation',
     'property_manager',
-    'booking'
+    'booking',
+    'event'
+    
 ]
 
 MIDDLEWARE = [
