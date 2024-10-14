@@ -25,6 +25,7 @@ class eventdata(models.Model):
     description = models.TextField(blank=True, null=True)
     tags = models.TextField(blank=True, null=True)  # Tags for the event
     category = models.CharField(max_length=100, default="Add category")
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
     def __str__(self):
         return self.title
