@@ -7,24 +7,6 @@ import re
 from .models import Property, PropertyImages
 from .serializers import PropertyImageSerializer, PropertySerializer
 
-# Function to convert a location URL to an embed URL
-def convert_to_embed_url(location_url):
-    try:
-        # Check if the URL is valid
-        url_obj = urlparse(location_url)
-        # Extract coordinates from the URL if available
-        coordinates_match = re.search(r'@(-?\d+\.\d+),(-?\d+\.\d+)', location_url)
-        if coordinates_match:
-            latitude = coordinates_match.group(1)
-            longitude = coordinates_match.group(2)
-            return f"https://www.google.com/maps/embed/v1/view?key=YOUR_API_KEY&center={latitude},{longitude}&zoom=15"
-        elif 'q=' in url_obj.query:
-            query_param = url_obj.query.split('q=')[-1].split('&')[0]
-            return f"https://www.google.com/maps/embed/v1/search?key=YOUR_API_KEY&q={query_param}"
-    except Exception as e:
-        print("Error converting to embed URL:", e)
-    return location_url  # Return original URL if conversion fails
-
 class PropertyViews(APIView):
     def get(self, request, id=None, org_id=None):
         if id:
@@ -43,10 +25,6 @@ class PropertyViews(APIView):
         request_data["org_id"] = org_id
         print("Received data:", request_data)
 
-        # Convert location_url to embed URL if it's provided
-        if 'location_url' in request_data and isinstance(request_data['location_url'], str):
-            request_data['location_url'] = convert_to_embed_url(request_data['location_url'])
-
         serializer = PropertySerializer(data=request_data)
         if serializer.is_valid():
             serializer.save()
@@ -63,10 +41,6 @@ class PropertyViews(APIView):
         request_data["org_id"] = org_id
 
         property_item = get_object_or_404(Property, id=id)
-
-        # Convert location_url if provided in the update request
-        if 'location_url' in request_data and isinstance(request_data['location_url'], str):
-            request_data['location_url'] = convert_to_embed_url(request_data['location_url'])
 
         serializer = PropertySerializer(property_item, data=request_data, partial=True)
         if serializer.is_valid():
