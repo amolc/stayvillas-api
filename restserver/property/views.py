@@ -4,8 +4,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from urllib.parse import urlparse
 import re
-from .models import Property
-from .serializers import PropertySerializer
+from .models import Property, PropertyImages
+from .serializers import PropertyImageSerializer, PropertySerializer
 
 # Function to convert a location URL to an embed URL
 def convert_to_embed_url(location_url):
