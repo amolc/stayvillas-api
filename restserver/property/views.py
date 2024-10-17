@@ -117,3 +117,15 @@ class PropertySearchViews(APIView):
         serializer = PropertySerializer(properties, many=True)
 
         return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+class PropertyFilterViews(APIView):
+     def post(self, request, *args, **kwargs):
+        price_filter = request.data.get('price', {})
+        queryset = Property.objects.all()
+
+        if 'min' in price_filter:
+            queryset = queryset.filter(cost_per_night__gte=price_filter['min'])
+        if 'max' in price_filter:
+            queryset = queryset.filter(cost_per_night__lte=price_filter.get('max'))
+
+        serializer = PropertySerializer(queryset, many=True)
+        return Response(serializer.data)

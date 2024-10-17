@@ -1,10 +1,11 @@
 from django.urls import path
-from .views import PropertyViews, PropertyImageViews, PropertySearchViews
+from .views import PropertyViews, PropertyImageViews, PropertySearchViews, PropertyFilterViews
 
 urlpatterns = [
     # Property routes
     path('properties/', PropertyViews.as_view()),  # GET all properties  or POST to create a property
     path('properties/search', PropertySearchViews.as_view()),  # GET all properties  or POST to create a property
+    path('properties/filter', PropertyFilterViews.as_view()),  # GET all properties  or POST to create a property
     path('properties/<int:id>/', PropertyViews.as_view()),  # GET, PATCH, DELETE a property by ID
     
     # Property image routes
