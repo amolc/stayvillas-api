@@ -83,3 +83,25 @@ class PropertyImageViews(APIView):
         image_item = get_object_or_404(PropertyImages, id=image_id)
         image_item.delete()
         return Response({'status': 'success', 'message': 'Image deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+    
+class PropertySearchViews(APIView):
+    def post(self, request, id=None, org_id=None):
+        data = request.data
+
+        # Get the city filter from request data
+        cities = data.get('city', None)
+
+        # Initialize the queryset
+        properties = Property.objects.all()
+
+        # Apply city filter if provided
+        if cities:
+            if isinstance(cities, list):
+                properties = properties.filter(city__in=cities)  # Filter by multiple cities
+            else:
+                properties = properties.filter(city__iexact=cities)  # Filter by a single city
+        
+        # Serialize the filtered properties
+        serializer = PropertySerializer(properties, many=True)
+
+        return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
