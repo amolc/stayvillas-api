@@ -7,28 +7,40 @@ from .serializers import PropertyImageSerializer, PropertySerializer
 
 
 class PropertyViews(APIView):
+    from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from django.shortcuts import get_object_or_404
+from .models import Property
+from .serializers import PropertySerializer
+
+class PropertyViews(APIView):
     def get(self, request, id=None, org_id=None):
         if id:
-            # Fetch a single property
+            # Fetch a single property by its ID
             property_item = get_object_or_404(Property, id=id)
             serializer = PropertySerializer(property_item)
             return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
         
-        # Fetch all properties for the organization
-        properties = Property.objects.all()
-        print(properties)
+        # Fetch all properties, filtered by org_id if provided
+        if org_id:
+            properties = Property.objects.filter(org_id=org_id)
+        else:
+            properties = Property.objects.all()
+        
         serializer = PropertySerializer(properties, many=True)
-        # print(serializer.data)
         return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
 
     def post(self, request, org_id=None):
         request_data = request.data.copy()
         request_data["org_id"] = org_id
+        print("Received data:", request_data)
         
         serializer = PropertySerializer(data=request_data)
         if serializer.is_valid():
             serializer.save()
             return Response({"status": "success", "data": serializer.data}, status=status.HTTP_201_CREATED)
+        print("Serializer errors:", serializer.errors)  # Debug line
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def patch(self, request, id=None, org_id=None):

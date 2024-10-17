@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.postgres.fields import ArrayField  # type: ignore
 
 # Create your models here.
 class Property(models.Model):
@@ -55,6 +56,7 @@ class Property(models.Model):
     address1 = models.CharField(max_length=100, default='Unknown')
     address2 = models.CharField(max_length=100, null=True, blank=True)
     pincode = models.CharField(max_length=20, default='Enter Pincode')
+    amenities = ArrayField(models.CharField(max_length=50), blank=True, default=list)
     
     created_date = models.DateTimeField(auto_now_add=True)
     created_by = models.IntegerField(default=0)
