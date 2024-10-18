@@ -58,6 +58,8 @@ class Property(models.Model):
     address2 = models.CharField(max_length=100, null=True, blank=True)
     pincode = models.CharField(max_length=20, default='Enter Pincode')
     amenities = ArrayField(models.CharField(max_length=50), blank=True, default=list)
+    best_rated = models.BooleanField(default=False)
+    most_loved = models.BooleanField(default=False)
     
     created_date = models.DateTimeField(auto_now_add=True)
     created_by = models.IntegerField(default=0)
