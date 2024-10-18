@@ -108,14 +108,44 @@ class PropertySearchViews(APIView):
 
         return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
 class PropertyFilterViews(APIView):
-     def post(self, request, *args, **kwargs):
-        price_filter = request.data.get('price', {})
-        queryset = Property.objects.all()
+    def post(self, request, id=None, org_id=None):
+        data = request.data
 
-        if 'min' in price_filter:
-            queryset = queryset.filter(cost_per_night__gte=price_filter['min'])
-        if 'max' in price_filter:
-            queryset = queryset.filter(cost_per_night__lte=price_filter.get('max'))
+        # Debug log to check the received data
+        print("Received filter data:", data)
 
-        serializer = PropertySerializer(queryset, many=True)
-        return Response(serializer.data)
+        # Get price range filter from request data
+        price_filter = data.get('price', {})
+        min_price = price_filter.get('min', None)
+        max_price = price_filter.get('max', None)
+
+        # Debug log to check the price filter values
+        print(f"Min price: {min_price}, Max price: {max_price}")
+
+        # Initialize the queryset
+        properties = Property.objects.all()
+
+        # Apply price range filter if provided
+        if min_price is not None:
+            properties = properties.filter(cost_per_night__gte=min_price)
+        if max_price is not None:
+            properties = properties.filter(cost_per_night__lte=max_price)
+
+        # Serialize the filtered properties
+        serializer = PropertySerializer(properties, many=True)
+
+        return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+
+
+# class PropertyFilterViews(APIView):
+#      def post(self, request, *args, **kwargs):
+#         price_filter = request.data.get('price', {})
+#         queryset = Property.objects.all()
+
+#         if 'min' in price_filter:
+#             queryset = queryset.filter(cost_per_night__gte=price_filter['min'])
+#         if 'max' in price_filter:
+#             queryset = queryset.filter(cost_per_night__lte=price_filter.get('max'))
+
+#         serializer = PropertySerializer(queryset, many=True)
+#         return Response(serializer.data)
