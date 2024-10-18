@@ -15,12 +15,13 @@ class BookingViews(APIView):
         request_data['org_id'] = org_id
         request_data['booking_status'] = 'Confirmed'
         
-        print(request_data) 
+        print("line no:18",request_data) 
         serializer = BookingSerializer(data=request_data)
         if serializer.is_valid():
             serializer.save()
             return Response({"status": "success", "data": serializer.data}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        print("line no 23",serializer.errors)
+        return Response({"status": "success", "data": serializer.errors})
 
     def get(self, request, id=None, org_id=None):
         if id:
