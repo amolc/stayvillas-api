@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -135,7 +136,33 @@ class PropertyFilterViews(APIView):
         serializer = PropertySerializer(properties, many=True)
 
         return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+class PropertyTopFilterViews(APIView):
+     def post(self, request, id=None, org_id=None):
+        data = request.data
 
+        # Extract filter values from the request
+        best_rated = data.get('best_rated', None)
+        most_loved = data.get('most_loved', None)
+
+        # Initialize the queryset with all properties
+        properties = Property.objects.all()
+
+        # Apply filter logic based on the selected filters
+        if best_rated is not None and most_loved is not None:
+            # Apply AND condition (both filters are true)
+            properties = properties.filter(best_rated=best_rated, most_loved=most_loved)
+        elif best_rated is not None or most_loved is not None:
+            # Apply OR condition (either one or both are selected)
+            conditions = Q()  # Initialize an empty Q object
+            if best_rated is not None:
+                conditions |= Q(best_rated=best_rated)  # Add OR condition for best_rated
+            if most_loved is not None:
+                conditions |= Q(most_loved=most_loved)  # Add OR condition for most_loved
+            properties = properties.filter(conditions)
+
+        # Serialize and return the filtered properties
+        serializer = PropertySerializer(properties, many=True)
+        return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
 
 # class PropertyFilterViews(APIView):
 #      def post(self, request, *args, **kwargs):
