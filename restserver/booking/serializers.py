@@ -1,13 +1,13 @@
 from rest_framework import serializers
 from .models import Booking, EventBooking, Customer
 
-class CustomerSerializer(serializers.ModelSerializer):
+class GuestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
-        fields = ['name', 'email', 'mobile_no']
+        fields = ['name', 'email', 'age']
 
 class BookingSerializer(serializers.ModelSerializer):
-    customers = CustomerSerializer(many=True)
+    customers = GuestSerializer(many=True)
 
     class Meta:
         model = Booking
