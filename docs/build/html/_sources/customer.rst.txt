@@ -28,7 +28,7 @@ URL
 
 **Local Development URL:**
 
-- `baseurl`` = "http://localhost:7777/1/api/"
+- `baseurl`` = "http://localhost:8888/1/api/"
 
 **Production URL:**
 
