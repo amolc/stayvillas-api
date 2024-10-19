@@ -1,38 +1,7 @@
-CRUD Operations
-========================
-
-This document describes the (Create, Read, Update) operations for the `Booking` model in the application.
-
-Booking Model
--------------
-
-
-The `Booking` model represents a user in the system and includes the following fields:
-
-- org_id (integer): The organization ID associated with the customer.
-- email (string): The email address of the customer.
-- property_type (string): The type of property (e.g., hotel, apartment, etc.).
-- guest_name (string): The name of the guest.
-- mobile_no (decimal): The mobile number of the guest.
-- check_in_date (date): The check-in date for the booking.
-- check_out_date (date): The check-out date for the booking.
-- num_guests (decimal): The number of guests in the booking.
-- num_rooms (decimal): The number of rooms booked.
-- special_requests (string): Any special requests made by the guest.
-- total_price (decimal): The total price of the booking.
-
-**URL**
--------
-**Local Development URL:**
-
-- `baseurl`` = "http://localhost:7777/1/api/"
-
-**Production URL:**
-
-- `baseurl`` = "https://api.sunandsandapi.com/1/api/"
-
 Booking
-=======
+========
+
+Booking Api for the property booking
 
 GetBooking 
 ----------

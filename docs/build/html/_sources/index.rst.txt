@@ -6,12 +6,24 @@
 stayvillas documentation
 ========================
 
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
+Welcome to stayvilla documentation , we will try and provide all documentation here.
+
 
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+
+   agent
+   enquiry
+   invester
+   property
+   property_listing
+   property_manager
+   users
+   cancellation
+   customer
+   destination
+   booking
+
 
