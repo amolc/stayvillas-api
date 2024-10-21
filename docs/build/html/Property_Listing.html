@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CRUD Operations &mdash; stayvillas 1.0 documentation</title>
+  <title>Property_Listing API &mdash; stayvillas 1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -44,12 +44,17 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="customer.html">CRUD Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="customer.html#customer">Customer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="booking.html">CRUD Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="booking.html#booking">Booking</a></li>
-<li class="toctree-l1"><a class="reference internal" href="destination.html">CRUD Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="destination.html#destination">Destination</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agent.html">Agent API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enquiry.html">Enquiry API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="invester.html">Invester API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="property.html">Property API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="property_manager.html">Property_manager API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cancellation.html">Cancellation API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customer.html">Customer API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event.html">Event API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="destination.html">Destination API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="booking.html">Booking API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="users.html">stayvillas documentation</a></li>
 </ul>
 
         </div>
@@ -66,9 +71,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">CRUD Operations</li>
+      <li class="breadcrumb-item active">Property_Listing API</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/property_listing.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/property_Listing.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -76,11 +81,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="crud-operations">
-<h1>CRUD Operations<a class="headerlink" href="#crud-operations" title="Link to this heading"></a></h1>
+  <section id="property-listing-api">
+<h1>Property_Listing API<a class="headerlink" href="#property-listing-api" title="Link to this heading"></a></h1>
 <p>This document describes the (Create, Read, Update) operations for the <cite>Property_Listing</cite> model in the application.</p>
-<section id="property-listing-model">
-<h2>Property_Listing Model<a class="headerlink" href="#property-listing-model" title="Link to this heading"></a></h2>
+<p><strong>Property_Listing Model</strong></p>
 <p>The <cite>Property_Listing</cite> model represents a user in the system and includes the following fields:</p>
 <ul class="simple">
 <li><p><cite>org_id</cite> (integer): The organization ID associated with the customer.</p></li>
@@ -100,9 +104,7 @@
 <li><p><cite>is_featured</cite> (boolean): Whether the customer's property is featured on the platform.</p></li>
 <li><p><cite>is_verified</cite> (boolean): Whether the customer or their property is verified by the platform.</p></li>
 </ul>
-</section>
-<section id="url">
-<h2><strong>URL</strong><a class="headerlink" href="#url" title="Link to this heading"></a></h2>
+<p><strong>URL</strong></p>
 <p><strong>Local Development URL:</strong></p>
 <ul class="simple">
 <li><p><cite>baseurl`</cite> = &quot;<a class="reference external" href="http://localhost:7777/1/api/">http://localhost:7777/1/api/</a>&quot;</p></li>
@@ -111,7 +113,6 @@
 <ul class="simple">
 <li><p><cite>baseurl`</cite> = &quot;<a class="reference external" href="https://api.sunandsandapi.com/1/api/">https://api.sunandsandapi.com/1/api/</a>&quot;</p></li>
 </ul>
-</section>
 </section>
 <section id="property-list">
 <h1>Property_List<a class="headerlink" href="#property-list" title="Link to this heading"></a></h1>

@@ -1,10 +1,10 @@
-CRUD Operations
-========================
+Event API
+==========
 
 This document describes the (Create, Read, Update) operations for the `Event` model in the application.
 
-Event Model
--------------
+**Event Model**
+
 
 
 The `Event` model represents a user in the system and includes the following fields:
@@ -19,7 +19,7 @@ The `Event` model represents a user in the system and includes the following fie
 - `Message` (string): Additional information or message provided by the customer.
 
 **URL**
--------
+
 **Local Development URL:**
 
 - `baseurl`` = "http://localhost:7777/1/api/"
@@ -28,8 +28,8 @@ The `Event` model represents a user in the system and includes the following fie
 
 - `baseurl`` = "https://api.sunandsandapi.com/1/api/"
 
-Event
-=====
+.. Event
+
 
 GetEvent 
 ----------

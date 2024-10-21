@@ -1,10 +1,10 @@
-CRUD Operations
+Destination API
 ===============
 
 This document describes the (Create, Read, Update) operations for the `Destination` model in the application.
 
-Destination Model
------------------
+**Destination Model**
+
 
 The `Destination` model represents a user in the system and includes the following fields:
 
@@ -13,8 +13,8 @@ The `Destination` model represents a user in the system and includes the followi
 - `city` (string) The city where the destination is located.
 - `img` A field that stores the image or image URL of the destination.
 
-URL
--------
+**URL**
+
 **Local Development URL:**
 
 - `baseurl`` = "http://localhost:7777/1/api/"
@@ -23,8 +23,8 @@ URL
 
 - `baseurl`` = "https://api.sunandsandapi.com/1/api/"
 
-Destination
-===========
+.. Destination
+.. ===========
 
 GetDestination 
 --------------

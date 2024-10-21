@@ -1,10 +1,10 @@
-CRUD Operations
+Property_Listing API
 ========================
 
 This document describes the (Create, Read, Update) operations for the `Property_Listing` model in the application.
 
-Property_Listing Model
-----------------------
+**Property_Listing Model**
+
 
 The `Property_Listing` model represents a user in the system and includes the following fields:
 
@@ -26,7 +26,7 @@ The `Property_Listing` model represents a user in the system and includes the fo
 - `is_verified` (boolean): Whether the customer or their property is verified by the platform.
             
 **URL**
--------
+
 **Local Development URL:**
 
 - `baseurl`` = "http://localhost:7777/1/api/"
