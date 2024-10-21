@@ -1,10 +1,10 @@
-CRUD Operations
-========================
+Enquiry API
+===========
 
 This document describes the (Create, Read, Update) operations for the `Enquiry` model in the application.
 
-Enquiry Model
--------------
+**Enquiry Model**
+
 
 
 The `Enquiry` model represents a user in the system and includes the following fields:
@@ -19,7 +19,7 @@ The `Enquiry` model represents a user in the system and includes the following f
 - `Message` (string): Additional information or message provided by the customer.
 
 **URL**
--------
+
 **Local Development URL:**
 
 - `baseurl`` = "http://localhost:7777/1/api/"
@@ -28,8 +28,8 @@ The `Enquiry` model represents a user in the system and includes the following f
 
 - `baseurl`` = "https://api.sunandsandapi.com/1/api/"
 
-Enquiry
-=======
+.. Enquiry
+.. =======
 
 GetEnquiry 
 ----------

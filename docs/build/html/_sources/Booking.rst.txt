@@ -1,5 +1,5 @@
-Booking
-========
+Booking API
+===========
 
 Booking Api for the property booking
 

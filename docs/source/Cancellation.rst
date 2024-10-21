@@ -1,10 +1,10 @@
-CRUD Operations
+Cancellation API
 ========================
 
 This document describes the (Create, Read, Update) operations for the `Cancellation model` in the application.
 
-Cancellation Model
-------------------
+**Cancellation Model**
+
 
 
 The `Cancellation` model represents a user in the system and includes the following fields:
@@ -19,7 +19,7 @@ The `Cancellation` model represents a user in the system and includes the follow
 - `Message` (string): Additional information or message provided by the customer.
 
 **URL**
--------
+
 **Local Development URL:**
 
 - `Baseurl`` = "http://localhost:7777/1/api/"
@@ -28,8 +28,8 @@ The `Cancellation` model represents a user in the system and includes the follow
 
 - `baseurl`` = "https://api.sunandsandapi.com/1/api/"
 
-Cancellation
-============
+.. Cancellation
+.. ============
 
 GetCancellation
 ---------------

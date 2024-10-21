@@ -6,7 +6,7 @@ This document describes the endpoints available for managing property agents.
 GetAllAgent
 -----------
 
-- **Endpoint:** ``GET http://localhost:8888/1/api/1/api/agent/get-agent/``
+- **Endpoint:** ``GET http://localhost:8888/1/api/agent/get-agent/``
 
 - **Description:** Retrieves a list of all agents.
 
@@ -40,7 +40,7 @@ GetAllAgent
 GetAgentbyId
 ------------
 
-- **Endpoint:** ``GET baseUrl/org_id/api/customer/get-customer/?id=2/``
+- **Endpoint:** ``http://0.0.0.0:8888/api/customer/get-customer/?id=2/``
 
 - **Description:** Fetches details of a specific agent using their ID.
 
@@ -74,7 +74,7 @@ GetAgentbyId
 CreateAgent
 -----------
 
-- **Endpoint:** ``POST baseUrl/org_id/api/agent/create-agent/``
+- **Endpoint:** ``http://0.0.0.0:8888/agent/create-agent/``
 
 - **Request Body:**
 
@@ -116,7 +116,7 @@ CreateAgent
 LoginAgent
 ----------
 
-- **Endpoint:** ``POST baseUrl/org_id/api/agent/login-agent/``
+- **Endpoint:** ``http://0.0.0.0:8888/agent/login-agent/``
 
 - **Request Body:**
 
@@ -132,7 +132,7 @@ LoginAgent
 UpdateAgent
 -----------
 
-- **Endpoint:** ``POST baseUrl/org_id/api/agent/update-agent/{Id}/``
+- **Endpoint:** ``http://0.0.0.0:8888/agent/update-agent/{Id}/``
 
 - **Request Body:**
 
