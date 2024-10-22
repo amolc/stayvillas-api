@@ -41,47 +41,17 @@ class RegisterAgentSerializer(serializers.ModelSerializer):
 
 
 class LoginSerializer(serializers.Serializer):
-    email = serializers.CharField(max_length=255)
-    password = serializers.CharField(
-        label=("password"),
-        style={'input_type': 'password'},
-        trim_whitespace=False,
-        max_length=125,
-        write_only=True
-    )
-
-    class Meta:
-        model = Agent
-        fields = '__all__'
+    email = serializers.EmailField()
+    password = serializers.CharField(write_only=True, style={'input_type': 'password'}, trim_whitespace=False)
 
     def validate(self, data):
         email = data.get('email')
         password = data.get('password')
-        if email and password:
-                            
-            #authenticate userdetails 
-            if is_email(email):
-                # authenticate user details
-                user = EmailBackend.authenticate(self, request=self.context.get('request'), email=email,
-                 password=password)
-            
-                print("======user===", user)
-                if not user:
-                    message = {'incorrectuser':'The email you entered does not exists'}
-                    raise serializers.ValidationError(message, code='authorization')
-                
-                if not user.check_password(password):
-                    message = {'incorrectpassword':'Entered password was not matching'}
-                    raise serializers.ValidationError(message, code='authorization')           
 
+        if not email or not password:
+            raise serializers.ValidationError('Both email and password are required.')
 
-        else:
-            message = {'message':'Must include "Username" and "Password"'}
-            raise serializers.ValidationError(message, code='authorization')
-
-        data['user'] = data
         return data
-
 
 class AgentSerializer(serializers.ModelSerializer):
     class Meta:
