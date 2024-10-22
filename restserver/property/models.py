@@ -60,6 +60,7 @@ class Property(models.Model):
     amenities = ArrayField(models.CharField(max_length=50), blank=True, default=list)
     best_rated = models.BooleanField(default=False)
     most_loved = models.BooleanField(default=False)
+    agent_id = models.PositiveIntegerField(default=1)
     
     created_date = models.DateTimeField(auto_now_add=True)
     created_by = models.IntegerField(default=0)

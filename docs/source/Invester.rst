@@ -1,10 +1,10 @@
-CRUD Operations
-========================
+Invester API
+============
 
 This document describes the (Create, Read, Update) operations for the `Invester` model in the application.
 
-Invester Model
---------------
+**Invester Model**
+
 
 The `Invester` model represents a user in the system and includes the following fields:
 
@@ -23,7 +23,7 @@ The `Invester` model represents a user in the system and includes the following 
 - `is_investor` (boolean): Indicates whether the user is marked as a customer.
 
 **URL**
--------
+
 **Local Development URL:**
 
 - `baseurl`` = "http://localhost:7777/1/api/"
@@ -32,8 +32,8 @@ The `Invester` model represents a user in the system and includes the following 
 
 - `baseurl`` = "https://api.sunandsandapi.com/1/api/"
 
-Invester
-========
+.. Invester
+
 
 GetAllInvester
 ---------------

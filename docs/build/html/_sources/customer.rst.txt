@@ -1,10 +1,10 @@
-CRUD Operations
+Customer API
 ===============
 
 This document describes the (Create, Read, Login) operations for the `Customer` model in the application.
 
-Customer Model
---------------
+**Customer Model**
+
 
 The `Customer` model represents a user in the system and includes the following fields:
 
@@ -23,8 +23,8 @@ The `Customer` model represents a user in the system and includes the following 
 - `Status`(string):The current status of the customer.
 - `displayName`(string): The display name of the customer, typically used for showing in user interfaces.
         
-URL
----
+**URL**
+
 
 **Local Development URL:**
 
@@ -34,8 +34,8 @@ URL
 
 - `baseurl`` = "https://api.sunandsandapi.com/1/api/"
 
-Customer
-========
+.. Customer
+.. ========
 
 GetAllCustomer
 ---------------

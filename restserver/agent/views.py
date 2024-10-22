@@ -33,43 +33,43 @@ class RegisterAgentViews(APIView):
             return Response(serializer_class.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class AuthenticateAgent(APIView):
+# class AuthenticateAgent(APIView):
 
-    def post(self, request, *args, **kwargs):
-        try:
-            serializer = LoginSerializer(data=request.data, context={'request': request})
-            if serializer.is_valid():
-                user = serializer.validated_data['user']
-                user_data = Agent.objects.filter(email=request.data['email']).first()
+#     def post(self, request, *args, **kwargs):
+#         try:
+#             serializer = LoginSerializer(data=request.data, context={'request': request})
+#             if serializer.is_valid():
+#                 user = serializer.validated_data['user']
+#                 user_data = Agent.objects.filter(email=request.data['email']).first()
 
-                if not user_data:
-                    return Response({'status': 'error', 'message': 'Agent not found'}, status=status.HTTP_404_NOT_FOUND)
+#                 if not user_data:
+#                     return Response({'status': 'error', 'message': 'Agent not found'}, status=status.HTTP_404_NOT_FOUND)
 
-                if not isinstance(user_data, Agent):
-                    return Response({'status': 'error', 'message': 'Invalid agent instance'}, status=status.HTTP_400_BAD_REQUEST)
+#                 if not isinstance(user_data, Agent):
+#                     return Response({'status': 'error', 'message': 'Invalid agent instance'}, status=status.HTTP_400_BAD_REQUEST)
 
-                token_instance, token = AuthToken.objects.create(user=user_data)
-                user_id = user_data.id
+#                 token_instance, token = AuthToken.objects.create(user=user_data)
+#                 user_id = user_data.id
 
-                data = {
-                    "status": status.HTTP_200_OK,
-                    'user_id': user_id,
-                    'is_super_admin': user_data.is_super_admin,
-                    'is_admin': user_data.is_admin,
-                    'is_agent': user_data.is_agent,
-                    'displayName': user_data.first_name,
-                    'emailId': user_data.email,
-                    "message": "Logged-in Successfully",
-                    "Token": token
-                }
+#                 data = {
+#                     "status": status.HTTP_200_OK,
+#                     'user_id': user_id,
+#                     'is_super_admin': user_data.is_super_admin,
+#                     'is_admin': user_data.is_admin,
+#                     'is_agent': user_data.is_agent,
+#                     'displayName': user_data.first_name,
+#                     'emailId': user_data.email,
+#                     "message": "Logged-in Successfully",
+#                     "Token": token
+#                 }
 
-                return Response({'status': "success", 'data': data})
+#                 return Response({'status': "success", 'data': data})
 
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#             else:
+#                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        except Exception as e:
-            return StayVillasResponse.exception_error(self.__class__.__name__, request, e)
+#         except Exception as e:
+#             return StayVillasResponse.exception_error(self.__class__.__name__, request, e)
 
 
 class AgentViews(APIView):
@@ -108,3 +108,26 @@ class AgentViews(APIView):
         agent = Agent.objects.get(id=id)
         agent.delete()
         return Response({'status': 'success', 'message': 'Agent deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+
+class LoginViews(APIView):
+    def post(self, request, id=None, org_id=None):
+        # Pass the request data to the serializer
+        serializer = LoginSerializer(data=request.data)
+
+        # Check if the data is valid
+        if serializer.is_valid():
+            email = serializer.validated_data['email']
+            password = serializer.validated_data['password']
+
+            # Directly return a successful login message with no other checks
+            return Response({
+                'status': 'success',
+                'message': f'Login successful for {email}',
+                'email': email,
+                'password': password 
+                
+                 # Note: Typically you wouldn't return the password
+            }, status=status.HTTP_200_OK)
+
+        # If the data is not valid, return the validation errors
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
