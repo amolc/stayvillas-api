@@ -163,7 +163,28 @@ class PropertyTopFilterViews(APIView):
         # Serialize and return the filtered properties
         serializer = PropertySerializer(properties, many=True)
         return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+class PropertySortViews(APIView):
+    def post(self, request, id=None, org_id=None):
+        data = request.data
 
+        # Get the sort option from request data
+        sort_by = data.get('sort_by', None)
+
+        # Initialize the queryset
+        properties = Property.objects.all()
+
+        # Apply sorting based on the sort_by parameter
+        if sort_by == 'most_loved':
+            properties = properties.order_by('-most_loved')
+        elif sort_by == 'price':
+            properties = properties.order_by('cost_per_night')
+        elif sort_by == 'best_rated':
+            properties = properties.order_by('-best_rated')
+        
+        # Serialize the sorted properties
+        serializer = PropertySerializer(properties, many=True)
+
+        return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
 # class PropertyFilterViews(APIView):
 #      def post(self, request, *args, **kwargs):
 #         price_filter = request.data.get('price', {})
