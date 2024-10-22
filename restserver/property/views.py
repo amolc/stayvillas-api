@@ -185,15 +185,28 @@ class PropertySortViews(APIView):
         serializer = PropertySerializer(properties, many=True)
 
         return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
-# class PropertyFilterViews(APIView):
-#      def post(self, request, *args, **kwargs):
-#         price_filter = request.data.get('price', {})
-#         queryset = Property.objects.all()
+        
+class PropertyAgentViews(APIView):
+    def post(self, request, id=None, org_id=None):
+        print("Request received at property agent filter view")  # Debugging line
+        data = request.data
+        print("Data received:", data)  # Debugging line
 
-#         if 'min' in price_filter:
-#             queryset = queryset.filter(cost_per_night__gte=price_filter['min'])
-#         if 'max' in price_filter:
-#             queryset = queryset.filter(cost_per_night__lte=price_filter.get('max'))
+        # Get the agent_id from request data
+        agent_id = data.get('agent_id', None)
+        print("Agent ID:", agent_id)  # Debugging line
 
-#         serializer = PropertySerializer(queryset, many=True)
-#         return Response(serializer.data)
+        if agent_id is None:
+            return Response({'status': 'error', 'message': 'agent_id is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Initialize the queryset
+        properties = Property.objects.all()
+
+        # Apply agent_id filter if provided
+        properties = properties.filter(agent_id=agent_id)
+
+        # Serialize the filtered properties
+        serializer = PropertySerializer(properties, many=True)
+
+        # Return the serialized data
+        return Response({'status': 'success', 'data': serializer.data}, status=status.HTTP_200_OK)
