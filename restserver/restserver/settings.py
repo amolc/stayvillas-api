@@ -134,9 +134,9 @@ SILENCED_SYSTEM_CHECKS = ["auth.E003"]
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',  # Use PostgreSQL engine
-        'NAME': os.environ.get('POSTGRES_DB', 'postgres'),
-        'USER': os.environ.get('POSTGRES_USER', 'postgres'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', '123456'),
+        'NAME': os.environ.get('POSTGRES_DB', 'postgres'), #check database name 
+        'USER': os.environ.get('POSTGRES_USER', 'postgres'),  #default
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', '123456'),  # put your password
         'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),  # Host for local development
         'PORT': os.environ.get('POSTGRES_PORT', '5432'),  # PostgreSQL default port
     }
