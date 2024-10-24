@@ -142,3 +142,18 @@ class LoginViews(APIView):
         # If the data is not valid, log the errors for debugging
         print("Serializer errors:", serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class AgentFilterViews(APIView):
+
+    def get(self, request, id=None, org_id=None):
+        try:
+            if id:
+                agent = Agent.objects.get(id=id)
+                serializer = AgentSerializer(agent)
+                return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+
+            agents = Agent.objects.all()
+            serializer = AgentSerializer(agents, many=True)
+            return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+        except Exception as e:
+            return StayVillasResponse.exception_error(self.__class__.__name__, request, e)
