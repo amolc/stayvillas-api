@@ -119,15 +119,26 @@ class LoginViews(APIView):
             email = serializer.validated_data['email']
             password = serializer.validated_data['password']
 
-            # Directly return a successful login message with no other checks
-            return Response({
-                'status': 'success',
-                'message': f'Login successful for {email}',
-                'email': email,
-                'password': password 
-                
-                 # Note: Typically you wouldn't return the password
-            }, status=status.HTTP_200_OK)
+            # Retrieve the user based on the provided email
+            user = Agent.objects.filter(email=email).first()
 
-        # If the data is not valid, return the validation errors
+            # Check if user exists and password matches
+            if user and user.check_password(password):
+                # Directly return a successful login message with user ID
+                return Response({
+                    'status': 'success',
+                    'message': f'Login successful for {email}',
+                    'email': email,
+                    'agent_id': user.id,
+                    # Note: Typically you wouldn't return the password
+                }, status=status.HTTP_200_OK)
+            
+            # User not found or password incorrect
+            return Response({
+                'status': 'error',
+                'message': 'Invalid email or password'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        # If the data is not valid, log the errors for debugging
+        print("Serializer errors:", serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

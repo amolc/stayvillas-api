@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -107,3 +108,105 @@ class PropertySearchViews(APIView):
         serializer = PropertySerializer(properties, many=True)
 
         return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+class PropertyFilterViews(APIView):
+    def post(self, request, id=None, org_id=None):
+        data = request.data
+
+        # Debug log to check the received data
+        print("Received filter data:", data)
+
+        # Get price range filter from request data
+        price_filter = data.get('price', {})
+        min_price = price_filter.get('min', None)
+        max_price = price_filter.get('max', None)
+
+        # Debug log to check the price filter values
+        print(f"Min price: {min_price}, Max price: {max_price}")
+
+        # Initialize the queryset
+        properties = Property.objects.all()
+
+        # Apply price range filter if provided
+        if min_price is not None:
+            properties = properties.filter(cost_per_night__gte=min_price)
+        if max_price is not None:
+            properties = properties.filter(cost_per_night__lte=max_price)
+
+        # Serialize the filtered properties
+        serializer = PropertySerializer(properties, many=True)
+
+        return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+class PropertyTopFilterViews(APIView):
+     def post(self, request, id=None, org_id=None):
+        data = request.data
+
+        # Extract filter values from the request
+        best_rated = data.get('best_rated', None)
+        most_loved = data.get('most_loved', None)
+
+        # Initialize the queryset with all properties
+        properties = Property.objects.all()
+
+        # Apply filter logic based on the selected filters
+        if best_rated is not None and most_loved is not None:
+            # Apply AND condition (both filters are true)
+            properties = properties.filter(best_rated=best_rated, most_loved=most_loved)
+        elif best_rated is not None or most_loved is not None:
+            # Apply OR condition (either one or both are selected)
+            conditions = Q()  # Initialize an empty Q object
+            if best_rated is not None:
+                conditions |= Q(best_rated=best_rated)  # Add OR condition for best_rated
+            if most_loved is not None:
+                conditions |= Q(most_loved=most_loved)  # Add OR condition for most_loved
+            properties = properties.filter(conditions)
+
+        # Serialize and return the filtered properties
+        serializer = PropertySerializer(properties, many=True)
+        return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+class PropertySortViews(APIView):
+    def post(self, request, id=None, org_id=None):
+        data = request.data
+
+        # Get the sort option from request data
+        sort_by = data.get('sort_by', None)
+
+        # Initialize the queryset
+        properties = Property.objects.all()
+
+        # Apply sorting based on the sort_by parameter
+        if sort_by == 'most_loved':
+            properties = properties.order_by('-most_loved')
+        elif sort_by == 'price':
+            properties = properties.order_by('cost_per_night')
+        elif sort_by == 'best_rated':
+            properties = properties.order_by('-best_rated')
+        
+        # Serialize the sorted properties
+        serializer = PropertySerializer(properties, many=True)
+
+        return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+        
+class PropertyAgentViews(APIView):
+    def post(self, request, id=None, org_id=None):
+        print("Request received at property agent filter view")  # Debugging line
+        data = request.data
+        print("Data received:", data)  # Debugging line
+
+        # Get the agent_id from request data
+        agent_id = data.get('agent_id', None)
+        print("Agent ID:", agent_id)  # Debugging line
+
+        if agent_id is None:
+            return Response({'status': 'error', 'message': 'agent_id is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Initialize the queryset
+        properties = Property.objects.all()
+
+        # Apply agent_id filter if provided
+        properties = properties.filter(agent_id=agent_id)
+
+        # Serialize the filtered properties
+        serializer = PropertySerializer(properties, many=True)
+
+        # Return the serialized data
+        return Response({'status': 'success', 'data': serializer.data}, status=status.HTTP_200_OK)
