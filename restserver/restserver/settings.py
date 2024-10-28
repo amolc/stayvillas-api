@@ -129,7 +129,7 @@ DATABASES = {
         'PORT': os.environ.get('MYSQL_PORT', '5432'),  # Default MySQL port
     }
 }
-
+#  the local configurations are added to file
 #local setup for if server is not working
 # DATABASES = {
 #     'default': {
