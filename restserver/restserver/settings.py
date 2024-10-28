@@ -125,7 +125,7 @@ DATABASES = {
         'NAME': os.environ.get('MYSQL_DB', 'stayvillas'),
         'USER': os.environ.get('MYSQL_USER', 'stockrobot'),
         'PASSWORD': os.environ.get('MYSQL_PASSWORD', '10gXWOqeaf'),
-        'HOST': os.environ.get('MYSQL_HOST', 'localhost'),
+        'HOST': os.environ.get('MYSQL_HOST', 'api.stayvillas.co'),
         'PORT': os.environ.get('MYSQL_PORT', '5432'),  # Default MySQL port
     }
 }
