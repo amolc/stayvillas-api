@@ -10,11 +10,11 @@ class Property(models.Model):
     ]
     
     GREAT_FOR_CHOICES = [
-        ('senior_citizen', 'Senior Citizen'),
-        ('kids', 'Kids'),
-        ('adults', 'Adults'),
-        ('all', 'All of the Above'),
-         ('Others', 'others'),
+        ('Senior_Citizen', 'Senior_Citizen'),
+        ('Kids', 'Kids'),
+        ('Adults', 'Adults'),
+        ('All', 'All'),
+        ('Others', 'Others'),
     ]
 
     org_id = models.PositiveIntegerField()
