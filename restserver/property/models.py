@@ -40,7 +40,7 @@ class Property(models.Model):
     
     # Bedroom image URLs
     bedroom1_image = models.TextField(null=True, blank=True)
-    description1 = models.TextField(default= '')
+    description1 = models.TextField(default='')
     bedroom2_image = models.TextField(null=True, blank=True)
     description2 = models.TextField(default='')
     bedroom3_image = models.TextField(null=True, blank=True)
