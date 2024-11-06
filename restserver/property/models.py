@@ -40,13 +40,13 @@ class Property(models.Model):
     
     # Bedroom image URLs
     bedroom1_image = models.TextField(null=True, blank=True)
-    description1 = models.TextField(default='No description available')
+    description1 = models.TextField(default= '')
     bedroom2_image = models.TextField(null=True, blank=True)
-    description2 = models.TextField(default='No description available')
+    description2 = models.TextField(default='')
     bedroom3_image = models.TextField(null=True, blank=True)
-    description3 = models.TextField(default='No description available')
+    description3 = models.TextField(default='')
     bedroom4_image = models.TextField(null=True, blank=True)
-    description4 = models.TextField(default='No description available')
+    description4 = models.TextField(default='')
     total_bedroom_size = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     square_feet = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
     location_url = models.TextField(null=True, blank=True)
