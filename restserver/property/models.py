@@ -54,6 +54,7 @@ class Property(models.Model):
     great_for = models.CharField(max_length=50, choices=GREAT_FOR_CHOICES, default='all')
     other_images = models.TextField(null=True, blank=True)
     img = models.TextField(null=True, blank=True)
+    img3 = models.TextField(null=True, blank=True)
     address1 = models.CharField(max_length=100, default='Unknown')
     address2 = models.CharField(max_length=100, null=True, blank=True)
     pincode = models.CharField(max_length=20, default='Enter Pincode')
@@ -61,7 +62,17 @@ class Property(models.Model):
     best_rated = models.BooleanField(default=False)
     most_loved = models.BooleanField(default=False)
     agent_id = models.PositiveIntegerField(default=1)
-    
+
+    room_name_1 = models.CharField(max_length=100, null=True, blank=True)
+    room_name_1_cost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    room_name_2 = models.CharField(max_length=100, null=True, blank=True)
+    room_name_2_cost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    room_name_3 = models.CharField(max_length=100, null=True, blank=True)
+    room_name_3_cost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    room_name_4 = models.CharField(max_length=100, null=True, blank=True)
+    room_name_4_cost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+
+
     created_date = models.DateTimeField(auto_now_add=True)
     created_by = models.IntegerField(default=0)
     updated_date = models.DateTimeField(null=True)
