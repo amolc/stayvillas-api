@@ -7,6 +7,7 @@ from urllib.parse import urlparse
 import re
 from .models import Property, PropertyImages
 from .serializers import PropertyImageSerializer, PropertySerializer
+from .utils import resize_base64_image
 
 class PropertyViews(APIView):
     def get(self, request, id=None, org_id=None):
@@ -20,19 +21,22 @@ class PropertyViews(APIView):
         properties = Property.objects.filter(org_id=org_id) if org_id else Property.objects.all()
         serializer = PropertySerializer(properties, many=True)
         return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
-
     def post(self, request, org_id=None):
-        request_data = request.data.copy()
-        request_data["org_id"] = org_id
-        print("Received data:", request_data)
+            request_data = request.data.copy()
+            request_data["org_id"] = org_id
 
-        serializer = PropertySerializer(data=request_data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({"status": "success", "data": serializer.data}, status=status.HTTP_201_CREATED)
-
-        print("Serializer errors:", serializer.errors)  # Debug line
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            # Handle the image resize here
+            if 'other_images' in request_data:
+                original_image = request_data['other_images']
+                resized_image = resize_base64_image(original_image, base_width=300)  # Resize image before saving
+                request_data['other_images'] = resized_image  # Replace with resized image
+            
+            serializer = PropertySerializer(data=request_data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response({"status": "success", "data": serializer.data}, status=status.HTTP_201_CREATED)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def patch(self, request, id=None, org_id=None):
         if not id:
