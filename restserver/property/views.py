@@ -24,18 +24,22 @@ class PropertyViews(APIView):
     def post(self, request, org_id=None):
             request_data = request.data.copy()
             request_data["org_id"] = org_id
-
+            print(request_data)
             # Handle the image resize here
             if 'other_images' in request_data:
                 original_image = request_data['other_images']
-                resized_image = resize_base64_image(original_image, base_width=300)  # Resize image before saving
-                request_data['other_images'] = resized_image  # Replace with resized image
-            
+                print(original_image)
+                # breakpoint()
+                resized_image = resize_base64_image(original_image, base_width=300) 
+                print(resized_image)
+                request_data['other_images'] = resized_image
+
             serializer = PropertySerializer(data=request_data)
             if serializer.is_valid():
                 serializer.save()
                 return Response({"status": "success", "data": serializer.data}, status=status.HTTP_201_CREATED)
             else:
+                print(serializer.errors)
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def patch(self, request, id=None, org_id=None):

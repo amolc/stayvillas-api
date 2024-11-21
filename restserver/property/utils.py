@@ -2,14 +2,16 @@ import base64
 from io import BytesIO
 from PIL import Image
 
-def resize_base64_image(base64_image, width):
+def resize_base64_image(base64_image, base_width):
     try:
+        print("line 7----------------------------------------------",base64_image)
         image_data = base64.b64decode(base64_image)
         img = Image.open(BytesIO(image_data))
-
-        wpercent = (width / float(img.size[0]))
+        print("line 9 resizeimg----------------------------------------------------")
+        print("line 10 -------------------------------------",img)
+        wpercent = (base_width / float(img.size[0]))
         hsize = int((float(img.size[1]) * float(wpercent)))
-        img = img.resize((width, hsize), Image.Resampling.LANCZOS)
+        img = img.resize((base_width, hsize), Image.Resampling.LANCZOS)
 
         buffer = BytesIO()
         img.save(buffer, format="JPEG")
