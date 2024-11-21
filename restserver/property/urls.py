@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PropertyViews, PropertyImageViews, PropertySearchViews, PropertyFilterViews, PropertyTopFilterViews, PropertySortViews,PropertyAgentViews
+from .views import PropertyViews, PropertyImageViews, PropertySearchViews, PropertyFilterViews, PropertyTopFilterViews, PropertySortViews,PropertyAgentViews,PropertyAgentPropertiesViews
 
 urlpatterns = [
     # Property routes
@@ -9,6 +9,7 @@ urlpatterns = [
     path('properties/filters', PropertyTopFilterViews.as_view()),  # GET all properties  or POST to create a property
     path('properties/sort', PropertySortViews.as_view()),  # GET all properties  or POST to create a property
     path('properties/agent', PropertyAgentViews.as_view()),  # GET all properties  or POST to create a property
+    path('properties/agent/<int:agent_id>/', PropertyAgentPropertiesViews.as_view()),  # GET, PATCH, DELETE a property by ID
     path('properties/<int:id>/', PropertyViews.as_view()),  # GET, PATCH, DELETE a property by ID
     
     # Property image routes

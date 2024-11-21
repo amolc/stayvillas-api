@@ -218,3 +218,24 @@ class PropertyAgentViews(APIView):
 
         # Return the serialized data
         return Response({'status': 'success', 'data': serializer.data}, status=status.HTTP_200_OK)
+    
+class PropertyAgentPropertiesViews(APIView):
+    def get(self, request, agent_id=None, org_id=None):
+        print("Request received at property agent filter view")  # Debugging line
+
+        # Use 'agent_id' from the URL path
+        print("Agent ID:", agent_id)  # Debugging line
+
+        if agent_id is None:
+            return Response({'status': 'error', 'message': 'agent_id is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Filter properties based on the agent_id
+        properties = Property.objects.filter(agent_id=agent_id)
+
+        # Serialize the filtered properties
+        serializer = PropertySerializer(properties, many=True)
+
+        # Return the serialized data
+        return Response({'status': 'success', 'data': serializer.data}, status=status.HTTP_200_OK)
+
+
