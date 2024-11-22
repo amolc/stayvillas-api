@@ -233,5 +233,33 @@ class PropertyAgentPropertiesViews(APIView):
 
         # Return the serialized data
         return Response({'status': 'success', 'data': serializer.data}, status=status.HTTP_200_OK)
+    
+class PropertyFilterByViews(APIView):
+    def get(self, request, id=None, org_id=None):
+        print("Request received at property agent filter view")  # Debugging line
+        data = request.query_params
+        print("Query params received:", data)  # Debugging line
+
+        # Initialize the queryset with all properties
+        properties = Property.objects.all()
+
+        # Handle 'type' filter (if present in query params)
+        property_type = data.get('type', None)
+        if property_type:
+            if property_type in dict(Property.PROPERTY_TYPE_CHOICES):
+                properties = properties.filter(property_type=property_type)
+            else:
+                return Response({'status': 'error', 'message': 'Invalid property type'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Handle 'city' filter (if present in query params)
+        city = data.get('city', None)
+        if city:
+            properties = properties.filter(city=city)
+
+        # Serialize the filtered properties
+        serializer = PropertySerializer(properties, many=True)
+
+        # Return the serialized data
+        return Response({'status': 'success', 'data': serializer.data}, status=status.HTTP_200_OK)
 
 
