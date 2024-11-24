@@ -1,13 +1,13 @@
-Enquiry API
-===========
+Event API
+==========
 
-This document describes the (Create, Read, Update) operations for the `Enquiry` model in the application.
+This document describes the (Create, Read, Update) operations for the `Event` model in the application.
 
-**Enquiry Model**
+**Event Model**
 
 
 
-The `Enquiry` model represents a user in the system and includes the following fields:
+The `Event` model represents a user in the system and includes the following fields:
 
 - `org_id` (integer): The organization ID associated with the customer.
 - `email` (string): The email address of the customer.
@@ -28,13 +28,13 @@ The `Enquiry` model represents a user in the system and includes the following f
 
 - `baseurl`` = "https://api.sunandsandapi.com/1/api/"
 
-.. Enquiry
-.. =======
+.. Event
 
-GetEnquiry 
+
+GetEvent 
 ----------
 
-- **Endpoint:** ``GET baseUrl/org_id/api/enquiry/get-enquiry/``
+- **Endpoint:** ``GET baseUrl/org_id/api/event/get-event/``
 
 - **Response Body:**
 
@@ -78,10 +78,10 @@ GetEnquiryById
     }
 
 
-CreateEnquiry
+CreateEvent
 -------------
 
-- **Endpoint:** ``POST baseUrl/org_id/api/enquiry/create-enquiry/``
+- **Endpoint:** ``POST baseUrl/org_id/api/event/create-event/``
 
 - **Request Body:**
 
@@ -117,10 +117,10 @@ CreateEnquiry
             }
     }
 
-UpdateEnquiry
+UpdateEvent
 -------------
 
-- **Endpoint:** ``Patch baseUrl/org_id/api/enquiry/update-enquiry/{Id}/``
+- **Endpoint:** ``Patch baseUrl/org_id/api/event/update-event/{Id}/``
 - **Request Body:**
 
 .. code-block:: json

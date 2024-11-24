@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Enquiry API &mdash; stayvillas 1.0 documentation</title>
+  <title>Event API &mdash; stayvillas 1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -21,8 +21,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Invester API" href="invester.html" />
-    <link rel="prev" title="Agent API" href="agent.html" /> 
+    <link rel="next" title="Destination API" href="destination.html" />
+    <link rel="prev" title="Customer API" href="customer.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -47,19 +47,19 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="agent.html">Agent API</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Enquiry API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#getenquiry">GetEnquiry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#getenquirybyid">GetEnquiryById</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#createenquiry">CreateEnquiry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#updateenquiry">UpdateEnquiry</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="enquiry.html">Enquiry API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="invester.html">Invester API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="property.html">Property API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="property_manager.html">Property_manager API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cancellation.html">Cancellation API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="customer.html">Customer API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="event.html">Event API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Event API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#getevent">GetEvent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getenquirybyid">GetEnquiryById</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#createevent">CreateEvent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#updateevent">UpdateEvent</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="destination.html">Destination API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="booking.html">Booking API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="users.html">stayvillas documentation</a></li>
@@ -79,9 +79,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Enquiry API</li>
+      <li class="breadcrumb-item active">Event API</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/enquiry.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/event.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -89,11 +89,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="enquiry-api">
-<h1>Enquiry API<a class="headerlink" href="#enquiry-api" title="Link to this heading"></a></h1>
-<p>This document describes the (Create, Read, Update) operations for the <cite>Enquiry</cite> model in the application.</p>
-<p><strong>Enquiry Model</strong></p>
-<p>The <cite>Enquiry</cite> model represents a user in the system and includes the following fields:</p>
+  <section id="event-api">
+<h1>Event API<a class="headerlink" href="#event-api" title="Link to this heading"></a></h1>
+<p>This document describes the (Create, Read, Update) operations for the <cite>Event</cite> model in the application.</p>
+<p><strong>Event Model</strong></p>
+<p>The <cite>Event</cite> model represents a user in the system and includes the following fields:</p>
 <ul class="simple">
 <li><p><cite>org_id</cite> (integer): The organization ID associated with the customer.</p></li>
 <li><p><cite>email</cite> (string): The email address of the customer.</p></li>
@@ -113,10 +113,10 @@
 <ul class="simple">
 <li><p><cite>baseurl`</cite> = &quot;<a class="reference external" href="https://api.sunandsandapi.com/1/api/">https://api.sunandsandapi.com/1/api/</a>&quot;</p></li>
 </ul>
-<section id="getenquiry">
-<h2>GetEnquiry<a class="headerlink" href="#getenquiry" title="Link to this heading"></a></h2>
+<section id="getevent">
+<h2>GetEvent<a class="headerlink" href="#getevent" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p><strong>Endpoint:</strong> <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">baseUrl/org_id/api/enquiry/get-enquiry/</span></code></p></li>
+<li><p><strong>Endpoint:</strong> <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">baseUrl/org_id/api/event/get-event/</span></code></p></li>
 <li><p><strong>Response Body:</strong></p></li>
 </ul>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -158,10 +158,10 @@
 </pre></div>
 </div>
 </section>
-<section id="createenquiry">
-<h2>CreateEnquiry<a class="headerlink" href="#createenquiry" title="Link to this heading"></a></h2>
+<section id="createevent">
+<h2>CreateEvent<a class="headerlink" href="#createevent" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p><strong>Endpoint:</strong> <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">baseUrl/org_id/api/enquiry/create-enquiry/</span></code></p></li>
+<li><p><strong>Endpoint:</strong> <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">baseUrl/org_id/api/event/create-event/</span></code></p></li>
 <li><p><strong>Request Body:</strong></p></li>
 </ul>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -195,10 +195,10 @@
 </pre></div>
 </div>
 </section>
-<section id="updateenquiry">
-<h2>UpdateEnquiry<a class="headerlink" href="#updateenquiry" title="Link to this heading"></a></h2>
+<section id="updateevent">
+<h2>UpdateEvent<a class="headerlink" href="#updateevent" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p><strong>Endpoint:</strong> <code class="docutils literal notranslate"><span class="pre">Patch</span> <span class="pre">baseUrl/org_id/api/enquiry/update-enquiry/{Id}/</span></code></p></li>
+<li><p><strong>Endpoint:</strong> <code class="docutils literal notranslate"><span class="pre">Patch</span> <span class="pre">baseUrl/org_id/api/event/update-event/{Id}/</span></code></p></li>
 <li><p><strong>Request Body:</strong></p></li>
 </ul>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -238,8 +238,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="agent.html" class="btn btn-neutral float-left" title="Agent API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="invester.html" class="btn btn-neutral float-right" title="Invester API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="customer.html" class="btn btn-neutral float-left" title="Customer API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="destination.html" class="btn btn-neutral float-right" title="Destination API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
