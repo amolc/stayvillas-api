@@ -4,7 +4,7 @@ from .models import Booking, EventBooking, Customer
 class GuestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
-        fields = ['name', 'email', 'age']
+        fields = ['name', 'email', 'age', 'phone']
 
 class BookingSerializer(serializers.ModelSerializer):
     customers = GuestSerializer(many=True)
