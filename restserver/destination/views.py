@@ -18,7 +18,7 @@ class DestinationViews(APIView):
                     status=status.HTTP_200_OK,
                 )
             else:
-                items = Destination.objects.all()
+                items = Destination.objects.all().order_by('-order_by')
                 serializer = DestinationSerializer(items, many=True)
                 return Response(
                     {"status": "success", "data": serializer.data},

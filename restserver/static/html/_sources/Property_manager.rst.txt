@@ -1,11 +1,9 @@
-CRUD Operations
-===============
+Property_manager API
+====================
 
 This document describes the (Create, Read, Update) operations for the `Property_manager` model in the application.
 
-Property_manager Model
-----------------------
-
+**Property_manager Model**
 
 The `Property_manager` model represents a user in the system and includes the following fields:
 
@@ -19,7 +17,7 @@ The `Property_manager` model represents a user in the system and includes the fo
 - `address` (string):The address of the property manager
 
 **URL**
--------
+
 **Local Development URL:**
 
 - `baseurl`` = "http://localhost:7777/1/api/"
@@ -28,8 +26,8 @@ The `Property_manager` model represents a user in the system and includes the fo
 
 - `baseurl`` = "https://api.sunandsandapi.com/1/api/"
 
-Property_manager
-================
+.. Property_manager
+.. ================
 
 GetProperty_manager 
 -------------------

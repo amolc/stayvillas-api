@@ -1,10 +1,10 @@
-CRUD Operations
-===============
+Property API
+============
 
 This document outlines the CRUD operations for the `Property` model in the application.
 
-Property Model
---------------
+**Property Model**
+
 
 The `Property` model represents a user in the system and includes the following fields:
 
@@ -21,8 +21,8 @@ The `Property` model represents a user in the system and includes the following 
 - `updated_date` (DateTimeField): The timestamp indicating when the property was last updated. This field is optional (nullable).
 - `updated_by`` (IntegerField): The ID of the user who last updated the property. Defaults to `0`.
 
-URL
--------
+**URL**
+
 **Local Development URL:**
 
 - `baseurl`` = "http://localhost:8888/1/api/"
@@ -31,8 +31,8 @@ URL
 
 - `baseurl`` = "https://api.sunandsandapi.com/1/api/"
 
-Property
-========
+.. Property
+.. ========
 
 GetAllProperties
 ----------------

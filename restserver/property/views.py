@@ -9,6 +9,8 @@ from .models import Property, PropertyImages
 from .serializers import PropertyImageSerializer, PropertySerializer
 from .utils import resize_base64_image
 
+import icecream as ic
+
 class PropertyViews(APIView):
     def get(self, request, id=None, org_id=None):
         if id:
@@ -64,6 +66,41 @@ class PropertyViews(APIView):
         property_item = get_object_or_404(Property, id=id)
         property_item.delete()
         return Response({'status': 'success', 'message': 'Property deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+
+
+
+class EditPropertyViews(APIView):
+
+    def patch(self, request, id=None, org_id=None):
+        if not id:
+            return Response({'status': 'error', 'message': 'Property ID is required for update'}, status=status.HTTP_400_BAD_REQUEST)
+
+        request_data = request.data.copy()
+        request_data["org_id"] = org_id
+        # print(id)
+        PropertyInstance = Property.objects.get(id=id)
+        # print(PropertyInstance)
+
+        # Let's resize the image.
+        if 'other_images' in request_data:
+            original_image = request_data['other_images']
+            # print(original_image)
+            # breakpoint()
+            resized_image = resize_base64_image(original_image, base_height=300) 
+            print(resized_image)
+            request_data['other_images'] = resized_image
+            
+        serializer = PropertySerializer(PropertyInstance, data=request_data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+        else:
+            print(serializer.errors)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        # return Response({"status": "success", "data": request.data}, status=status.HTTP_400_BAD_REQUEST)
+
+
 
 class PropertyImageViews(APIView):
     def post(self, request, org_id=None, property_id=None):
@@ -231,6 +268,34 @@ class PropertyAgentPropertiesViews(APIView):
 
         # Filter properties based on the agent_id
         properties = Property.objects.filter(agent_id=agent_id)
+
+        # Serialize the filtered properties
+        serializer = PropertySerializer(properties, many=True)
+
+        # Return the serialized data
+        return Response({'status': 'success', 'data': serializer.data}, status=status.HTTP_200_OK)
+    
+class PropertyFilterByViews(APIView):
+    def get(self, request, id=None, org_id=None):
+        print("Request received at property agent filter view")  # Debugging line
+        data = request.query_params
+        print("Query params received:", data)  # Debugging line
+
+        # Initialize the queryset with all properties
+        properties = Property.objects.all()
+
+        # Handle 'type' filter (if present in query params)
+        property_type = data.get('type', None)
+        if property_type:
+            if property_type in dict(Property.PROPERTY_TYPE_CHOICES):
+                properties = properties.filter(property_type=property_type)
+            else:
+                return Response({'status': 'error', 'message': 'Invalid property type'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Handle 'city' filter (if present in query params)
+        city = data.get('city', None)
+        if city:
+            properties = properties.filter(city=city)
 
         # Serialize the filtered properties
         serializer = PropertySerializer(properties, many=True)
