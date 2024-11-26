@@ -9,7 +9,7 @@ from .serializers import BookingSerializer, GuestSerializer, EventBookingSeriali
 from django.shortcuts import get_object_or_404
 from .utils import send_booking_email
 
-class BookingView(APIView):
+class BookingViews(APIView):
     def post(self, request, org_id=None):
         request_data = request.data.copy()
         request_data['org_id'] = org_id
