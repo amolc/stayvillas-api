@@ -1,7 +1,8 @@
+import os
 import boto3
 from botocore.exceptions import NoCredentialsError, PartialCredentialsError
 
-AWS_REGION = "ap-southeast-1"  # Adjust as needed
+AWS_REGION = os.getenv('AWS_REGION_NAME', 'ap-southeast-1')  # Adjust as needed
 CHARSET = "UTF-8"
 SENDER = "support@stayvillas.co"  # Replace with your verified SES email
 
@@ -12,8 +13,8 @@ def send_booking_email(recipient, subject, body_text, body_html):
     try:
         ses_client = boto3.client(
             'ses',
-            aws_access_key_id='your_aws_access_key_id',  # Replace with your AWS key
-            aws_secret_access_key='your_aws_secret_access_key',  # Replace with your secret key
+             aws_access_key_id=os.getenv('AWS_ACCESS_KEY_ID'),
+            aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY'),
             region_name=AWS_REGION
         )
 
