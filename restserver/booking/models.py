@@ -3,7 +3,8 @@ from django.db import models
 class Customer(models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField()
-    age = models.CharField(max_length=15)
+    age = models.CharField(max_length=15,null=True, blank=True)
+    phone = models.CharField(max_length=15,null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -12,7 +13,8 @@ class Booking(models.Model):
 
     check_in_date = models.DateField()
     check_out_date = models.DateField()
-
+    propertyId = models.PositiveIntegerField(default=0, null=True, blank=True)
+    agentId = models.PositiveIntegerField(default=0, null=True, blank=True)
     num_guests = models.IntegerField(default=1)
     num_rooms = models.IntegerField(default=1)  # Add number of rooms
     # special_requests = models.TextField(blank=True, null=True)

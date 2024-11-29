@@ -13,13 +13,19 @@ class Enquiry(models.Model):
     ]
 
     org_id = models.PositiveIntegerField(null=True, blank=True)  # Organization ID
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    email = models.EmailField()
-    mobile_no = models.CharField(max_length=15)
-    concern = models.CharField(max_length=50, choices=CONCERN_CHOICES)
-    property_location = models.CharField(max_length=255)
-    message = models.TextField()
+    first_name = models.CharField(max_length=100, null=True, blank=True)
+    last_name = models.CharField(max_length=100, null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
+    phone = models.CharField(max_length=15, default='', null=True, blank=True)
+    check_in_date = models.DateField(null=True, blank=True)
+    check_out_date = models.DateField(null=True, blank=True)
+    mobile_no = models.CharField(max_length=15, null=True, blank=True)
+    num_guests = models.PositiveIntegerField(default=0, null=True, blank=True)
+    propertyId = models.PositiveIntegerField(default=0, null=True, blank=True)
+    agentId = models.PositiveIntegerField(default=0, null=True, blank=True)
+    concern = models.CharField(max_length=50, choices=CONCERN_CHOICES, null=True, blank=True)
+    property_location = models.CharField(max_length=255, null=True, blank=True)
+    message = models.TextField(null=True, blank=True)
 
     class Meta:
         db_table = "enquiries"

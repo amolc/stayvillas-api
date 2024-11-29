@@ -12,10 +12,11 @@ from django.db import transaction
 from knox.models import AuthToken # type: ignore
 
 # Custom
-from .serializers import RegisterAgentSerializer, LoginSerializer, AgentSerializer
+from .serializers import ForgotPasswordRequestSerializer, RegisterAgentSerializer, LoginSerializer, AgentSerializer, ResetPasswordSerializer
 from .models import Agent
 from common.utils import StayVillasResponse
 
+from .utils import send_reset_email
 
 class RegisterAgentViews(APIView):
     def post(self, request, org_id=None):
@@ -157,3 +158,54 @@ class AgentFilterViews(APIView):
             return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
         except Exception as e:
             return StayVillasResponse.exception_error(self.__class__.__name__, request, e)
+
+class ForgotPasswordView(APIView):
+    def post(self, request,org_id=None):
+        serializer = ForgotPasswordRequestSerializer(data=request.data)
+        if serializer.is_valid():
+            email = serializer.validated_data['email']
+            agent = Agent.objects.get(email=email)
+            agent.generate_reset_token()
+            
+            # Prepare email content
+            subject = "Password Reset Request"
+            reset_url = f"http://localhost:3500/agent/reset-password.html?uuid={agent.reset_password_token}"
+            body_text = f"Hello {agent.first_name},\n\nYou requested a password reset. Click the link below:\n{reset_url}\n\nIf you did not request this, ignore this email."
+            body_html = f"""
+                <html>
+                <body>
+                    <h3>Hello {agent.first_name},</h3>
+                    <p>You requested a password reset. Click the link below:</p>
+                    <a href="{reset_url}">Reset Password</a>
+                    <p>If you did not request this, ignore this email.</p>
+                </body>
+                </html>
+            """
+
+            # Send email
+            try:
+                send_reset_email(email, subject, body_text, body_html)
+            except Exception as e:
+                return Response({"message": f"Error sending email: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+            return Response({"message": "Password reset link sent successfully."}, status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ResetPasswordView(APIView):
+    def post(self, request,org_id=None):
+        serializer = ResetPasswordSerializer(data=request.data)
+        if serializer.is_valid():
+            token = serializer.validated_data['token']
+            new_password = serializer.validated_data['new_password']
+            
+            # Update password
+            agent = Agent.objects.get(reset_password_token=token)
+            agent.set_password(new_password)
+            agent.reset_password_token = None  # Invalidate the token
+            agent.reset_password_expiration = None
+            agent.save(update_fields=['password', 'reset_password_token', 'reset_password_expiration'])
+            
+            return Response({"message": "Password has been reset successfully."}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

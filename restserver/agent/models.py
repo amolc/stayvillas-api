@@ -1,9 +1,10 @@
-from django.db import models
 
 # Create your models here.
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-
+import uuid
+from datetime import timedelta
+from django.utils.timezone import now
 class AgentManager(BaseUserManager):
     def create_user(self, email, password=None, **kwargs):
         user = self.model(email=email, **kwargs)
@@ -42,13 +43,21 @@ class Agent(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     is_agent = models.BooleanField(default=True)
 
+    reset_password_token = models.UUIDField(null=True, blank=True)
+    reset_password_expiration = models.DateTimeField(null=True, blank=True)
+    image = models.TextField(null=True, blank=True)
+
     objects = AgentManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name', 'phone_number']
-
     class Meta:
         db_table = "Agents"
+    def generate_reset_token(self):
+        """Generate a password reset token and set its expiration."""
+        self.reset_password_token = uuid.uuid4()
+        self.reset_password_expiration = now() + timedelta(hours=1)  # 1-hour expiration
+        self.save(update_fields=['reset_password_token', 'reset_password_expiration'])
 
 class AgentLogs(models.Model):
     logid = models.BigAutoField(primary_key=True, editable=False)

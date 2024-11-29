@@ -28,13 +28,13 @@ class PropertyViews(APIView):
             request_data["org_id"] = org_id
             print(request_data)
             # Handle the image resize here
-            if 'other_images' in request_data:
-                original_image = request_data['other_images']
-                print(original_image)
-                # breakpoint()
-                resized_image = resize_base64_image(original_image, base_width=300) 
-                print(resized_image)
-                request_data['other_images'] = resized_image
+            # if 'other_images' in request_data:
+            #     original_image = request_data['other_images']
+            #     print(original_image)
+            #     # breakpoint()
+            #     resized_image = resize_base64_image(original_image, base_width=300) 
+            #     print(resized_image)
+            #     request_data['other_images'] = resized_image
 
             serializer = PropertySerializer(data=request_data)
             if serializer.is_valid():

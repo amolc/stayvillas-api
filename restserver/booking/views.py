@@ -7,21 +7,70 @@ from rest_framework import status
 from .models import Booking, Customer, Customer, EventBooking
 from .serializers import BookingSerializer, GuestSerializer, EventBookingSerializer
 from django.shortcuts import get_object_or_404
+from .utils import send_booking_email
 
 class BookingViews(APIView):
-    
     def post(self, request, org_id=None):
         request_data = request.data.copy()
         request_data['org_id'] = org_id
-        request_data['booking_status'] = 'Confirmed'
-        
-        print("line no:18",request_data) 
+
         serializer = BookingSerializer(data=request_data)
         if serializer.is_valid():
-            serializer.save()
+            # Save booking data
+            booking = serializer.save()
+
+            # Send email to customers
+            try:
+                customers = booking.customers.all()  # Get associated customers
+                for customer in customers:
+                    if customer.email:  # Check if the customer has an email
+                        subject = "Booking Confirmation"
+                        body_text = f"""
+                        Dear {customer.name},
+
+                        Thank you for your booking with StayVillas. Here are your booking details:
+                        - Check-in Date: {booking.check_in_date}
+                        - Check-out Date: {booking.check_out_date}
+                        - Number of Guests: {booking.num_guests}
+                        - PropertyID: {booking.propertyId}
+
+                        We look forward to hosting you!
+
+                        Best regards,
+                        StayVillas Team
+                        """
+                        body_html = f"""
+                        <html>
+                        <head></head>
+                        <body>
+                            <h1>Booking Confirmation</h1>
+                            <p>Dear {customer.name},</p>
+                            <p>Thank you for your booking with StayVillas. Here are your booking details:</p>
+                            <ul>
+                                <li><b>Check-in Date:</b> {booking.check_in_date}</li>
+                                <li><b>Check-out Date:</b> {booking.check_out_date}</li>
+                                <li><b>Number of Guests:</b> {booking.num_guests}</li>
+                                <li><b>PropertyID:</b> {booking.propertyId}</li>
+                            </ul>
+                            <p>We look forward to hosting you!</p>
+                            <p>Best regards,<br>StayVillas Team</p>
+                        </body>
+                        </html>
+                        """
+                        # Call utility function to send email
+                        send_booking_email(
+                            recipient=customer.email,
+                            subject=subject,
+                            body_text=body_text,
+                            body_html=body_html
+                        )
+                        print(f"Booking confirmation email sent to {customer.email}.")
+            except Exception as e:
+                print(f"Error sending booking confirmation email: {str(e)}")  # Log errors
+
             return Response({"status": "success", "data": serializer.data}, status=status.HTTP_201_CREATED)
-        print("line no 23",serializer.errors)
-        return Response({"status": "success", "data": serializer.errors})
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, id=None, org_id=None):
         if id:

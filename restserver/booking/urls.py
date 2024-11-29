@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import BookingViews, EventBookingViews, GuestViews
+from .views import *
 
 urlpatterns = [
     path('create-booking/', BookingViews.as_view()),  # POST
