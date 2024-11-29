@@ -18,20 +18,20 @@ from pathlib import Path
 
 # Take environment variables from .env file
 # environ.Env.read_env()
-import environ
+# import environ
 import os
 
 # Initialize environment variables
-env = environ.Env()
+# env = environ.Env()
 
 # Ensure the .env file is loaded
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-env.read_env(os.path.join(BASE_DIR, '.env'))
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Access environment variables
-AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
-AWS_REGION_NAME = env("AWS_REGION_NAME", default="ap-southeast-1")
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+AWS_REGION_NAME = os.getenv("AWS_REGION_NAME", default="ap-southeast-1")
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
