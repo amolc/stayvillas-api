@@ -13,6 +13,7 @@ urlpatterns = [
     path('properties/<int:id>/', PropertyViews.as_view()),  # GET, PATCH, DELETE a property by ID
     path('properties/s/', PropertyFilterByViews.as_view()),  # GET all properties  or POST to create a property
     path('editproperty/<int:id>/', EditPropertyViews.as_view()),  # GET, PATCH, DELETE a property by ID
+    path('properties/get-agent/<int:agent_id>/', PropertyAgentPropertyViews.as_view()),  # GET, PATCH, DELETE a property by ID
     
     # Property image routes
     # path('properties/<int:property_id>/images/', PropertyImageViews.as_view()),  # POST to upload images for a property
