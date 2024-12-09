@@ -82,7 +82,8 @@ INSTALLED_APPS = [
     'cancellation',
     'property_manager',
     'booking',
-    'event'
+    'event',
+    'holidays'
     
 ]
 
