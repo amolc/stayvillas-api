@@ -4,8 +4,11 @@ from botocore.exceptions import NoCredentialsError, PartialCredentialsError
 
 
 AWS_REGION = os.getenv('AWS_REGION_NAME', 'ap-southeast-1')
-AWS_KEY_ID = os.getenv('AWS_SECRET_KEY_ID', '')
-AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY', '')
+AWS_KEY_ID = os.getenv('AWS_SECRET_KEY_ID', 'AKIAXEVXYOKKUVONZJEZ')
+AWS_SECRET_ACCESS_KEY = os.getenv(
+    'AWS_SECRET_ACCESS_KEY',
+    'CjH5AEcDVIBCrrXGj25kF3fnOkLf1a6E1FX12luI'
+)
 
 CHARSET = "UTF-8"
 SENDER = "support@stayvillas.co"  # Replace with your verified SES email

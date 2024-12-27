@@ -7,6 +7,7 @@ from .serializers import DestinationSerializer
 from .models import Destination
 from common.utils import StayVillasResponse
 
+
 class DestinationViews(APIView):
 
     def get(self, request, id=None, org_id=None):

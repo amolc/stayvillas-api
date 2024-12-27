@@ -1,6 +1,7 @@
 # Create your models here.
 from django.db import models
 
+
 class Holiday(models.Model):
     title = models.CharField(max_length=255)
     title_tag = models.CharField(max_length=255, blank=True, null=True)
@@ -18,8 +19,8 @@ class Holiday(models.Model):
     holiday_inclusion = models.TextField(blank=True, null=True)
     day_wise_itinerary = models.TextField(blank=True, null=True)
     terms_and_condition = models.TextField(blank=True, null=True)
-    holiday_image1 = models.CharField( null=True, blank=True)  # First product image path
-    holiday_image2 = models.CharField( null=True, blank=True)  # First product image path
+    holiday_image1 = models.TextField( null=True, blank=True)  # First product image path
+    holiday_image2 = models.TextField( null=True, blank=True)  # First product image path
 
 
     def __str__(self):
