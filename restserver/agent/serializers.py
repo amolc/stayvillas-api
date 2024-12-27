@@ -3,6 +3,7 @@ from rest_framework import serializers
 from .models import Agent
 from django.contrib.auth.backends import BaseBackend
 from django.contrib.auth import get_user_model
+from django.utils.timezone import now
 
 # Custom Email Backend for authentication
 class EmailBackend(BaseBackend):
@@ -57,3 +58,25 @@ class AgentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Agent
         fields = '__all__'
+
+class ForgotPasswordRequestSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+    def validate_email(self, value):
+        if not Agent.objects.filter(email=value).exists():
+            raise serializers.ValidationError("No account is associated with this email.")
+        return value
+
+
+class ResetPasswordSerializer(serializers.Serializer):
+    token = serializers.UUIDField()
+    new_password = serializers.CharField(write_only=True)
+
+    def validate(self, data):
+        try:
+            agent = Agent.objects.get(reset_password_token=data['token'])
+            if agent.reset_password_expiration < now():
+                raise serializers.ValidationError("The token has expired.")
+            return data
+        except Agent.DoesNotExist:
+            raise serializers.ValidationError("Invalid reset token.")

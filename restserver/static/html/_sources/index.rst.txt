@@ -1,14 +1,7 @@
-.. stayvillas documentation master file, created by
-   sphinx-quickstart on Thu Sep 12 12:27:43 2024.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+Stayvillas Documentation
+=========================
 
-stayvillas documentation
-========================
-
-Welcome to stayvilla documentation , we will try and provide all documentation here.
-
-
+Welcome to the Stayvillas documentation. We will strive to provide all relevant documentation here.
 
 .. toctree::
    :maxdepth: 2
@@ -20,10 +13,9 @@ Welcome to stayvilla documentation , we will try and provide all documentation h
    property
    property_listing
    property_manager
-   users
    cancellation
    customer
+   event
    destination
    booking
-
-
+   users

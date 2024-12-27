@@ -15,7 +15,7 @@ class PropertySerializer(serializers.ModelSerializer):
             'bedroom1_image', 'description1', 'bedroom2_image', 'description2',
             'bedroom3_image', 'description3', 'bedroom4_image', 'description4',
             'total_bedroom_size', 'square_feet', 'location_url', 'video_url', 'great_for', 'best_rated', 'most_loved',
-            'other_images', 'img', 'address1', 'address2', 'pincode', 'amenities','agent_id',
+            'other_images', 'img','img3','room_name_1','room_name_1_cost','room_name_2','room_name_2_cost','room_name_3','room_name_3_cost','room_name_4','room_name_4_cost', 'address1', 'address2', 'pincode', 'amenities','agent_id',
             'created_date', 'created_by', 'updated_date', 'updated_by'
         ]
         read_only_fields = ['id', 'created_date', 'created_by', 'updated_date', 'updated_by']

@@ -10,11 +10,11 @@ class Property(models.Model):
     ]
     
     GREAT_FOR_CHOICES = [
-        ('senior_citizen', 'Senior Citizen'),
-        ('kids', 'Kids'),
-        ('adults', 'Adults'),
-        ('all', 'All of the Above'),
-         ('Others', 'others'),
+        ('Senior_Citizen', 'Senior_Citizen'),
+        ('Kids', 'Kids'),
+        ('Adults', 'Adults'),
+        ('All', 'All'),
+        ('Others', 'Others'),
     ]
 
     org_id = models.PositiveIntegerField()
@@ -40,13 +40,13 @@ class Property(models.Model):
     
     # Bedroom image URLs
     bedroom1_image = models.TextField(null=True, blank=True)
-    description1 = models.TextField(default='No description available')
+    description1 = models.TextField(default='')
     bedroom2_image = models.TextField(null=True, blank=True)
-    description2 = models.TextField(default='No description available')
+    description2 = models.TextField(default='')
     bedroom3_image = models.TextField(null=True, blank=True)
-    description3 = models.TextField(default='No description available')
+    description3 = models.TextField(default='')
     bedroom4_image = models.TextField(null=True, blank=True)
-    description4 = models.TextField(default='No description available')
+    description4 = models.TextField(default='')
     total_bedroom_size = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     square_feet = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
     location_url = models.TextField(null=True, blank=True)
@@ -54,6 +54,7 @@ class Property(models.Model):
     great_for = models.CharField(max_length=50, choices=GREAT_FOR_CHOICES, default='all')
     other_images = models.TextField(null=True, blank=True)
     img = models.TextField(null=True, blank=True)
+    img3 = models.TextField(null=True, blank=True)
     address1 = models.CharField(max_length=100, default='Unknown')
     address2 = models.CharField(max_length=100, null=True, blank=True)
     pincode = models.CharField(max_length=20, default='Enter Pincode')
@@ -61,7 +62,17 @@ class Property(models.Model):
     best_rated = models.BooleanField(default=False)
     most_loved = models.BooleanField(default=False)
     agent_id = models.PositiveIntegerField(default=1)
-    
+
+    room_name_1 = models.CharField(max_length=100, null=True, blank=True)
+    room_name_1_cost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    room_name_2 = models.CharField(max_length=100, null=True, blank=True)
+    room_name_2_cost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    room_name_3 = models.CharField(max_length=100, null=True, blank=True)
+    room_name_3_cost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    room_name_4 = models.CharField(max_length=100, null=True, blank=True)
+    room_name_4_cost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+
+
     created_date = models.DateTimeField(auto_now_add=True)
     created_by = models.IntegerField(default=0)
     updated_date = models.DateTimeField(null=True)

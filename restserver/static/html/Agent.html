@@ -21,8 +21,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="CRUD Operations" href="enquiry.html" />
-    <link rel="prev" title="stayvillas documentation" href="index.html" /> 
+    <link rel="next" title="Enquiry API" href="enquiry.html" />
+    <link rel="prev" title="Stayvillas Documentation" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -54,25 +54,16 @@
 <li class="toctree-l2"><a class="reference internal" href="#updateagent">UpdateAgent</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="enquiry.html">CRUD Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="enquiry.html#enquiry">Enquiry</a></li>
-<li class="toctree-l1"><a class="reference internal" href="invester.html">CRUD Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="invester.html#invester">Invester</a></li>
-<li class="toctree-l1"><a class="reference internal" href="property.html">CRUD Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="property.html#property">Property</a></li>
-<li class="toctree-l1"><a class="reference internal" href="property_listing.html">CRUD Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="property_listing.html#property-list">Property_List</a></li>
-<li class="toctree-l1"><a class="reference internal" href="property_manager.html">CRUD Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="property_manager.html#property-manager">Property_manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enquiry.html">Enquiry API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="invester.html">Invester API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="property.html">Property API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="property_manager.html">Property_manager API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cancellation.html">Cancellation API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customer.html">Customer API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event.html">Event API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="destination.html">Destination API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="booking.html">Booking API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="users.html">stayvillas documentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cancellation.html">CRUD Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cancellation.html#cancellation">Cancellation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="customer.html">CRUD Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="customer.html#customer">Customer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="destination.html">CRUD Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="destination.html#destination">Destination</a></li>
-<li class="toctree-l1"><a class="reference internal" href="booking.html">CRUD Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="booking.html#booking">Booking</a></li>
 </ul>
 
         </div>
@@ -138,7 +129,7 @@
 <section id="getagentbyid">
 <h2>GetAgentbyId<a class="headerlink" href="#getagentbyid" title="Link to this heading"></a></h2>
 <ul>
-<li><p><strong>Endpoint:</strong> <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">baseUrl/org_id/api/customer/get-customer/?id=2/</span></code></p></li>
+<li><p><strong>Endpoint:</strong> <code class="docutils literal notranslate"><span class="pre">http://0.0.0.0:8888/api/customer/get-customer/?id=2/</span></code></p></li>
 <li><p><strong>Description:</strong> Fetches details of a specific agent using their ID.</p></li>
 <li><p><strong>Response Body:</strong></p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -171,7 +162,7 @@
 <section id="createagent">
 <h2>CreateAgent<a class="headerlink" href="#createagent" title="Link to this heading"></a></h2>
 <ul>
-<li><p><strong>Endpoint:</strong> <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">baseUrl/org_id/api/agent/create-agent/</span></code></p></li>
+<li><p><strong>Endpoint:</strong> <code class="docutils literal notranslate"><span class="pre">http://0.0.0.0:8888/agent/create-agent/</span></code></p></li>
 <li><p><strong>Request Body:</strong></p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;qwer@gmail.com&quot;</span><span class="p">,</span>
@@ -211,7 +202,7 @@
 <section id="loginagent">
 <h2>LoginAgent<a class="headerlink" href="#loginagent" title="Link to this heading"></a></h2>
 <ul>
-<li><p><strong>Endpoint:</strong> <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">baseUrl/org_id/api/agent/login-agent/</span></code></p></li>
+<li><p><strong>Endpoint:</strong> <code class="docutils literal notranslate"><span class="pre">http://0.0.0.0:8888/agent/login-agent/</span></code></p></li>
 <li><p><strong>Request Body:</strong></p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;agent@gmail.com&quot;</span><span class="p">,</span>
@@ -226,7 +217,7 @@
 <section id="updateagent">
 <h2>UpdateAgent<a class="headerlink" href="#updateagent" title="Link to this heading"></a></h2>
 <ul>
-<li><p><strong>Endpoint:</strong> <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">baseUrl/org_id/api/agent/update-agent/{Id}/</span></code></p></li>
+<li><p><strong>Endpoint:</strong> <code class="docutils literal notranslate"><span class="pre">http://0.0.0.0:8888/agent/update-agent/{Id}/</span></code></p></li>
 <li><p><strong>Request Body:</strong></p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;admin@gmail.com&quot;</span><span class="p">,</span>
@@ -278,8 +269,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="stayvillas documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="enquiry.html" class="btn btn-neutral float-right" title="CRUD Operations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Stayvillas Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="enquiry.html" class="btn btn-neutral float-right" title="Enquiry API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

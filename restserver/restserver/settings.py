@@ -18,6 +18,20 @@ from pathlib import Path
 
 # Take environment variables from .env file
 # environ.Env.read_env()
+# import environ
+import os
+
+# Initialize environment variables
+# env = environ.Env()
+
+# Ensure the .env file is loaded
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# env.read_env(os.path.join(BASE_DIR, '.env'))
+
+# Access environment variables
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+AWS_REGION_NAME = os.getenv("AWS_REGION_NAME", default="ap-southeast-1")
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -54,6 +68,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'rest_framework',
     "corsheaders",
     'knox',
@@ -67,7 +82,8 @@ INSTALLED_APPS = [
     'cancellation',
     'property_manager',
     'booking',
-    'event'
+    'event',
+    'holidays'
     
 ]
 
@@ -119,28 +135,28 @@ SILENCED_SYSTEM_CHECKS = ["auth.E003"]
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',  # Using MySQL engine
-#         'NAME': os.environ.get('MYSQL_DB', 'stayvillas'),
-#         'USER': os.environ.get('MYSQL_USER', 'stockrobot'),
-#         'PASSWORD': os.environ.get('MYSQL_PASSWORD', '10gXWOqeaf'),
-#         'HOST': os.environ.get('MYSQL_HOST', 'm2.quantbots.co'),
-#         'PORT': os.environ.get('MYSQL_PORT', '5432'),  # Default MySQL port
-#     }
-# }
-
-#local setup for if server is not working
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',  # Use PostgreSQL engine
-        'NAME': os.environ.get('POSTGRES_DB', 'postgres'), #check database name 
-        'USER': os.environ.get('POSTGRES_USER', 'postgres'),  #default
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', '123456'),  # put your password
-        'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),  # Host for local development
-        'PORT': os.environ.get('POSTGRES_PORT', '5432'),  # PostgreSQL default port
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',  # Using MySQL engine
+        'NAME': os.environ.get('MYSQL_DB', 'stayvillas'),
+        'USER': os.environ.get('MYSQL_USER', 'stockrobot'),
+        'PASSWORD': os.environ.get('MYSQL_PASSWORD', '10gXWOqeaf'),
+        'HOST': os.environ.get('MYSQL_HOST', 'api.stayvillas.co'),
+        'PORT': os.environ.get('MYSQL_PORT', '5432'),  # Default MySQL port
     }
 }
+#  the local configurations are added to file
+#local setup for if server is not working
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',  # Use PostgreSQL engine
+#         'NAME': os.environ.get('POSTGRES_DB', 'postgres'), #check database name 
+#         'USER': os.environ.get('POSTGRES_USER', 'postgres'),  #default
+#         'PASSWORD': os.environ.get('POSTGRES_PASSWORD', '123456'),  # put your password
+#         'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),  # Host for local development
+#         'PORT': os.environ.get('POSTGRES_PORT', '5432'),  # PostgreSQL default port
+#     }
+# }
 
 
 
