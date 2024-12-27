@@ -2,9 +2,14 @@ import os
 import boto3
 from botocore.exceptions import NoCredentialsError, PartialCredentialsError
 
+
 AWS_REGION = os.getenv('AWS_REGION_NAME', 'ap-southeast-1')
+AWS_KEY_ID = os.getenv('AWS_SECRET_KEY_ID', '')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY', '')
+
 CHARSET = "UTF-8"
 SENDER = "support@stayvillas.co"  # Replace with your verified SES email
+
 
 def send_booking_enquiry_mail(recipient, subject, body_text, body_html):
     try:
@@ -17,7 +22,7 @@ def send_booking_enquiry_mail(recipient, subject, body_text, body_html):
 
         response = ses_client.send_email(
             Source=SENDER,
-            Destination={'ToAddresses': [recipient]},
+            Destination={'ToAddresses': [SENDER]},
             Message={
                 'Subject': {'Data': subject, 'Charset': CHARSET},
                 'Body': {

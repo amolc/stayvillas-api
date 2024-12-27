@@ -9,6 +9,7 @@ from .serializers import EnquirySerializer
 from django.shortcuts import get_object_or_404
 from .utils import send_booking_enquiry_mail  # Import the utility function
 
+
 class EnquiryViews(APIView):
     def post(self, request, org_id=None):
         request_data = request.data.copy()
