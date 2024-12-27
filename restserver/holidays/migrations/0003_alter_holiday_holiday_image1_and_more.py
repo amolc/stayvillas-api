@@ -13,11 +13,19 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='holiday',
             name='holiday_image1',
+<<<<<<< HEAD
+            field=models.CharField(max_length=500, blank=True, null=True),
+=======
             field=models.CharField(blank=True, null=True),
+>>>>>>> 9f8ffbc (Changes in prod.)
         ),
         migrations.AlterField(
             model_name='holiday',
             name='holiday_image2',
+<<<<<<< HEAD
+            field=models.CharField(max_length=500, blank=True, null=True),
+=======
             field=models.CharField(blank=True, null=True),
+>>>>>>> 9f8ffbc (Changes in prod.)
         ),
     ]
