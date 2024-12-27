@@ -19,7 +19,6 @@ from pathlib import Path
 # Take environment variables from .env file
 # environ.Env.read_env()
 # import environ
-import os
 
 # Initialize environment variables
 # env = environ.Env()
@@ -34,16 +33,19 @@ AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 AWS_REGION_NAME = os.getenv("AWS_REGION_NAME", default="ap-southeast-1")
 
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/') # type: ignore
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')  # type: ignore
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-kd$!n!^n!zu-cp3c6he_9)+q!vd@z-06yb*fm9^9jvdoz80=)%'
+SECRET_KEY = (
+    'django-insecure-kd$!n!^n!zu-cp3c6he_9)'
+    '+q!vd@z-06yb*fm9^9jvdoz80=)%'
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -83,8 +85,7 @@ INSTALLED_APPS = [
     'property_manager',
     'booking',
     'event',
-    'holidays'
-    
+    'holidays',
 ]
 
 MIDDLEWARE = [
@@ -118,9 +119,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'restserver.wsgi.application'
 
-
-
-
 AUTH_USER_MODEL = 'customers.Customers'
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -135,46 +133,35 @@ SILENCED_SYSTEM_CHECKS = ["auth.E003"]
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',  # Using MySQL engine
-        'NAME': os.environ.get('MYSQL_DB', 'stayvillas'),
-        'USER': os.environ.get('MYSQL_USER', 'stockrobot'),
-        'PASSWORD': os.environ.get('MYSQL_PASSWORD', '10gXWOqeaf'),
-        'HOST': os.environ.get('MYSQL_HOST', 'api.stayvillas.co'),
-        'PORT': os.environ.get('MYSQL_PORT', '5432'),  # Default MySQL port
-    }
-}
+
 #  the local configurations are added to file
-#local setup for if server is not working
+# local setup for if server is not working
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',  # Use PostgreSQL engine
-#         'NAME': os.environ.get('POSTGRES_DB', 'postgres'), #check database name 
-#         'USER': os.environ.get('POSTGRES_USER', 'postgres'),  #default
-#         'PASSWORD': os.environ.get('POSTGRES_PASSWORD', '123456'),  # put your password
-#         'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),  # Host for local development
-#         'PORT': os.environ.get('POSTGRES_PORT', '5432'),  # PostgreSQL default port
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': os.environ.get('POSTGRES_DB', 'postgres'),
+#         'USER': os.environ.get('POSTGRES_USER', 'postgres'),
+#         'PASSWORD': os.environ.get('POSTGRES_PASSWORD', '123456'),
+#         'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
+#         'PORT': os.environ.get('POSTGRES_PORT', '5432'),
 #     }
 # }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',  # noqa: E501
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',  # noqa: E501
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',  # noqa: E501
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',  # noqa: E501
     },
 ]
 
@@ -194,23 +181,27 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_DIR = os.path.join (BASE_DIR, "static")
+STATIC_DIR = os.path.join(
+    BASE_DIR,
+    "static"
+)
 
-
-STATIC_URL ='/static/'# path to read css with local (probably)
+STATIC_URL = '/static/'  # path to read css with local (probably)
 STATICFILES_DIRS = [
-        os.path.join (BASE_DIR, "static"),
-    ]
+    os.path.join(
+        BASE_DIR,
+        "static"
+    ),
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-import sentry_sdk
-
+import sentry_sdk   # noqa: E402
 sentry_sdk.init(
-    dsn="https://343f07974b6db30273660bf67a127cb8@o4508080204611584.ingest.us.sentry.io/4508080205987840",
+    dsn="https://343f07974b6db30273660bf67a127cb8@o4508080204611584.ingest.us.sentry.io/4508080205987840",   # noqa: E501
     # Set traces_sample_rate to 1.0 to capture 100%
     # of transactions for tracing.
     traces_sample_rate=1.0,
