@@ -1,14 +1,7 @@
 # Create your models here.
 from django.db import models
 
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> 9f8ffbc (Changes in prod.)
->>>>>>> 73fd3c2847fdb7ab12b0b6bb060438e003fe8def
 class Holiday(models.Model):
     title = models.CharField(max_length=255)
     title_tag = models.CharField(max_length=255, blank=True, null=True)
