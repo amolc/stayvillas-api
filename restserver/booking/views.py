@@ -7,7 +7,7 @@ from rest_framework import status
 from .models import Booking, Customer, Customer, EventBooking
 from .serializers import BookingSerializer, GuestSerializer, EventBookingSerializer
 from django.shortcuts import get_object_or_404
-from .utils import send_booking_email
+from .tasks import send_booking_email_smtp
 
 class BookingViews(APIView):
     def post(self, request, org_id=None):
@@ -58,7 +58,7 @@ class BookingViews(APIView):
                         </html>
                         """
                         # Call utility function to send email
-                        send_booking_email(
+                        send_booking_email_smtp(
                             recipient=customer.email,
                             subject=subject,
                             body_text=body_text,
@@ -100,7 +100,7 @@ class EventBookingViews(APIView):
         request_data = request.data.copy()
         request_data['org_id'] = org_id
 
-        print(request_data) 
+        print(request_data)
         serializer = EventBookingSerializer(data=request_data)
         if serializer.is_valid():
             serializer.save()
