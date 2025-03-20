@@ -2,10 +2,10 @@
 # exporting env variables to be used with django server
 export DJANGO_SETTINGS_MODULE="restserver.settings.production"
 export SERVICE_PORT=7777
-export MYSQL_USER="stockrobot"
+export MYSQL_USER="apollo"
 export MYSQL_DB="stayvillas"
-export MYSQL_HOST="api.stayvillas.co"
-export MYSQL_PASSWORD="10gXWOqeaf"
+export MYSQL_HOST="api.apollotravels.co"
+export MYSQL_PASSWORD="12gXWOqeaf!"
 export MYSQL_PORT="5432"
 export CELERY_URL="amqp://localhost"
 export REDIS_HOST="127.0.0.1"
