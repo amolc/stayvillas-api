@@ -26,6 +26,10 @@ class Holiday(models.Model):
     meta_title = models.TextField( null=True, blank=True)  # First product image path
     meta_keywords = models.TextField( null=True, blank=True)  # First product image path
     meta_description = models.TextField( null=True, blank=True)  # First product image path
+    abouttrip = models.TextField( null=True, blank=True)  # First product image path
+    org_id = models.IntegerField(blank=True, null=True,default=1)
+    created_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
