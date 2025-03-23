@@ -1,0 +1,188 @@
+{
+    "info": {
+      "name": "StayVillas Agent API",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Create Agent",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "url": {
+            "raw": "{{base_url}}/create-agent/",
+            "host": ["{{base_url}}"],
+            "path": ["create-agent"]
+          },
+          "body": {
+            "mode": "raw",
+            "raw": "{\n    \"name\": \"Test Agent\",\n    \"email\": \"testagent@example.com\",\n    \"password\": \"securepassword123\",\n    \"phone\": \"1234567890\"\n}"
+          },
+          "description": "Register a new agent"
+        }
+      },
+      {
+        "name": "Login Agent",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "url": {
+            "raw": "{{base_url}}/login-agent/",
+            "host": ["{{base_url}}"],
+            "path": ["login-agent"]
+          },
+          "body": {
+            "mode": "raw",
+            "raw": "{\n    \"email\": \"testagent@example.com\",\n    \"password\": \"securepassword123\"\n}"
+          },
+          "description": "Login with agent credentials"
+        }
+      },
+      {
+        "name": "Get All Agents",
+        "request": {
+          "method": "GET",
+          "header": [
+            {
+              "key": "Authorization",
+              "value": "Bearer {{token}}"
+            }
+          ],
+          "url": {
+            "raw": "{{base_url}}/get-agent/",
+            "host": ["{{base_url}}"],
+            "path": ["get-agent"]
+          },
+          "description": "Get a list of all agents"
+        }
+      },
+      {
+        "name": "Get Agent by ID",
+        "request": {
+          "method": "GET",
+          "header": [
+            {
+              "key": "Authorization",
+              "value": "Bearer {{token}}"
+            }
+          ],
+          "url": {
+            "raw": "{{base_url}}/get-agent/1/",
+            "host": ["{{base_url}}"],
+            "path": ["get-agent", "1"]
+          },
+          "description": "Get a specific agent by ID"
+        }
+      },
+      {
+        "name": "Update Agent",
+        "request": {
+          "method": "PUT",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Authorization",
+              "value": "Bearer {{token}}"
+            }
+          ],
+          "url": {
+            "raw": "{{base_url}}/update-agent/1/",
+            "host": ["{{base_url}}"],
+            "path": ["update-agent", "1"]
+          },
+          "body": {
+            "mode": "raw",
+            "raw": "{\n    \"name\": \"Updated Agent Name\",\n    \"phone\": \"9876543210\"\n}"
+          },
+          "description": "Update an agent's information"
+        }
+      },
+      {
+        "name": "Delete Agent",
+        "request": {
+          "method": "DELETE",
+          "header": [
+            {
+              "key": "Authorization",
+              "value": "Bearer {{token}}"
+            }
+          ],
+          "url": {
+            "raw": "{{base_url}}/delete-agent/1/",
+            "host": ["{{base_url}}"],
+            "path": ["delete-agent", "1"]
+          },
+          "description": "Delete an agent by ID"
+        }
+      },
+      {
+        "name": "Forgot Password",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "url": {
+            "raw": "{{base_url}}/forgot-password/",
+            "host": ["{{base_url}}"],
+            "path": ["forgot-password"]
+          },
+          "body": {
+            "mode": "raw",
+            "raw": "{\n    \"email\": \"testagent@example.com\"\n}"
+          },
+          "description": "Request a password reset"
+        }
+      },
+      {
+        "name": "Reset Password",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "url": {
+            "raw": "{{base_url}}/reset-password/",
+            "host": ["{{base_url}}"],
+            "path": ["reset-password"]
+          },
+          "body": {
+            "mode": "raw",
+            "raw": "{\n    \"token\": \"your-reset-token\",\n    \"password\": \"newpassword123\",\n    \"confirm_password\": \"newpassword123\"\n}"
+          },
+          "description": "Reset password with token"
+        }
+      }
+    ],
+    "variable": [
+      {
+        "key": "base_url",
+        "value": "http://localhost:8000/api/agent",
+        "type": "string"
+      },
+      {
+        "key": "token",
+        "value": "your-auth-token-here",
+        "type": "string"
+      }
+    ]
+  }

@@ -1,0 +1,99 @@
+{
+    "info": {
+      "name": "StayVillas Holiday API",
+      "description": "Collection for testing Holiday API endpoints based on actual URLs",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Get All Holidays",
+        "request": {
+          "method": "GET",
+          "url": {
+            "raw": "http://localhost:8888/1/api/holidays/get-holiday/",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8888",
+            "path": ["1", "api", "get-holiday", ""]
+          },
+          "description": "Retrieve all holidays"
+        }
+      },
+      {
+        "name": "Get Holiday by ID",
+        "request": {
+          "method": "GET",
+          "url": {
+            "raw": "http://localhost:8888/1/api/get-holiday/1/",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8888",
+            "path": ["1", "api", "get-holiday", "1", ""]
+          },
+          "description": "Retrieve a specific holiday by ID"
+        }
+      },
+      {
+        "name": "Create Holiday",
+        "request": {
+          "method": "POST",
+          "url": {
+            "raw": "http://localhost:8888/1/api/holidays/create-holiday/",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8888",
+            "path": ["1", "api", "create-holiday", ""]
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"title\": \"Goa Beach Vacation\",\n  \"title_tag\": \"Beach, Relaxation\",\n  \"num_of_days\": 5,\n  \"price\": 25000.00,\n  \"operated_by\": \"StayVillas Tours\",\n  \"meals_short_tag\": \"Breakfast, Dinner\",\n  \"max_group_size\": 10,\n  \"highlights\": \"Beautiful beaches, water sports, nightlife\",\n  \"meals\": \"Day 1: Welcome dinner\\nDay 2-5: Breakfast included\",\n  \"flights\": \"Not included\",\n  \"accommodation_property_id_1\": 101,\n  \"accommodation_property_id_2\": 102,\n  \"holiday_inclusion\": \"Airport transfers, Daily breakfast, Welcome dinner, Sightseeing\",\n  \"day_wise_itinerary\": \"Day 1: Arrival and check-in\\nDay 2: Beach day\\nDay 3: Water sports\\nDay 4: Local sightseeing\\nDay 5: Departure\",\n  \"terms_and_condition\": \"Cancellation policy: 100% refund if cancelled 30 days before arrival\",\n  \"holiday_image1\": \"https://example.com/images/goa1.jpg\",\n  \"holiday_image2\": \"https://example.com/images/goa2.jpg\",\n  \"cities\": \"Panaji, Calangute, Anjuna, Baga\",\n  \"keywords\": \"beach vacation, goa beaches, water sports, beach holiday, india beaches\",\n  \"meta_description\": \"Experience the ultimate beach vacation in Goa with pristine beaches, exciting water sports, and vibrant nightlife. Book your 5-day Goa Beach Vacation package now!\",\n  \"meta_keywords\": \"goa vacation, beach holiday, india tourism, water sports, beach activities\",\n  \"meta_title\": \"Goa Beach Vacation | 5 Days of Sun, Sand & Sea | StayVillas\"\n}"
+          },
+          "description": "Create a new holiday"
+        }
+      },
+      {
+        "name": "Update Holiday",
+        "request": {
+          "method": "PATCH",
+          "url": {
+            "raw": "http://localhost:8888/1/api/holidays/update-holiday/1/",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8888",
+            "path": ["1", "api", "update-holiday", "1", ""]
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"title\": \"Goa Beach Vacation - Updated\",\n  \"price\": 28000.00,\n  \"max_group_size\": 12,\n  \"highlights\": \"Beautiful beaches, water sports, nightlife, spa treatments\"\n}"
+          },
+          "description": "Update an existing holiday"
+        }
+      },
+      {
+        "name": "Delete Holiday",
+        "request": {
+          "method": "DELETE",
+          "url": {
+            "raw": "http://localhost:8888/1/api/holidays/delete-holiday/1/",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8888",
+            "path": ["1", "api", "delete-holiday", "1", ""]
+          },
+          "description": "Delete a holiday"
+        }
+      }
+    ]
+  }
