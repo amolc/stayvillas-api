@@ -3,7 +3,7 @@
 export DJANGO_SETTINGS_MODULE="restserver.settings.production"
 export SERVICE_PORT=7777
 export MYSQL_USER="apollo"
-export MYSQL_DB="stayvillas"
+export MYSQL_DB="apollotravels"
 export MYSQL_HOST="api.apollotravels.co"
 export MYSQL_PASSWORD="12gXWOqeaf!"
 export MYSQL_PORT="5432"
